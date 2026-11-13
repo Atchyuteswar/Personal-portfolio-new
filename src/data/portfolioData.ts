@@ -148,22 +148,41 @@ export const portfolioData = {
     musicConfig: {
       enabled: true,
       autoplayOnVisit: true,
+      randomizeOnVisit: true,
       defaultVolume: 0.35, // 35% gentle background study volume
       // Optional: Place an MP3 file at `public/music.mp3` and set customMp3Url: "/music.mp3"
-      // Leave empty ("") to use the built-in Generative Academic Lo-Fi / Ambient Synth!
+      // Leave empty ("") to use the 5 built-in Generative Academic Soundscapes!
       customMp3Url: "",
       tracks: [
         {
-          id: "synth-library",
-          title: "Archival Study — Warm Rhodes & Chords",
-          subtitle: "Generative Academic Soundscape",
+          id: "track-01-rhodes",
+          title: "I. Archival Study — Warm Rhodes & Chimes",
+          subtitle: "Fmaj9 Jazz Harmony & Bell Overtones",
           mode: "chords",
         },
         {
-          id: "synth-nightlab",
-          title: "Late-Night Lab — Deep Ambient Pad",
-          subtitle: "Low-Frequency Focus Drone",
-          mode: "drone",
+          id: "track-02-arpeggio",
+          title: "II. Glass Monograph — Minimalist Arpeggios",
+          subtitle: "Flowing Felt-Piano & Harp Patterns",
+          mode: "arpeggio",
+        },
+        {
+          id: "track-03-lofi",
+          title: "III. Midnight Thesis — Lo-Fi Beat & Sub Pulse",
+          subtitle: "Neo-Soul Chords with Soft Lo-Fi Rhythm",
+          mode: "lofi",
+        },
+        {
+          id: "track-04-cosmos",
+          title: "IV. Observatory — Ethereal Lydian Pad",
+          subtitle: "Deep Shimmering Space & Harmonic Swells",
+          mode: "cosmos",
+        },
+        {
+          id: "track-05-conservatory",
+          title: "V. Courtyard Conservatory — Chamber Plucks",
+          subtitle: "Classical Counterpoint & Acoustic Strings",
+          mode: "baroque",
         },
       ],
     },
