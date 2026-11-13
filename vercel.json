@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "cleanUrls": true,
+  "installCommand": "npm install --no-fund --no-audit --loglevel=error",
+  "buildCommand": "npm run build",
+  "env": {
+    "NEXT_TELEMETRY_DISABLED": "1"
+  },
   "headers": [
     {
       "source": "/(.*)",
@@ -22,4 +27,3 @@
     }
   ]
 }
-

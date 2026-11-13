@@ -145,6 +145,28 @@ export const portfolioData = {
         { label: "Cloud & AI Badges", value: "30+ Earned" },
       ],
     },
+    musicConfig: {
+      enabled: true,
+      autoplayOnVisit: true,
+      defaultVolume: 0.35, // 35% gentle background study volume
+      // Optional: Place an MP3 file at `public/music.mp3` and set customMp3Url: "/music.mp3"
+      // Leave empty ("") to use the built-in Generative Academic Lo-Fi / Ambient Synth!
+      customMp3Url: "",
+      tracks: [
+        {
+          id: "synth-library",
+          title: "Archival Study — Warm Rhodes & Chords",
+          subtitle: "Generative Academic Soundscape",
+          mode: "chords",
+        },
+        {
+          id: "synth-nightlab",
+          title: "Late-Night Lab — Deep Ambient Pad",
+          subtitle: "Low-Frequency Focus Drone",
+          mode: "drone",
+        },
+      ],
+    },
   },
 
   // --------------------------------------------------------------------------

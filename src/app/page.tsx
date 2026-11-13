@@ -6,6 +6,7 @@ import ProjectSection from "@/components/ProjectSection";
 import PublicationsSection from "@/components/PublicationsSection";
 import EducationTimeline from "@/components/EducationTimeline";
 import ExperienceAndCampus from "@/components/ExperienceAndCampus";
+import AmbientMusicPlayer from "@/components/AmbientMusicPlayer";
 
 export default function AcademicPortfolioPage() {
   return (
@@ -19,7 +20,7 @@ export default function AcademicPortfolioPage() {
         <EducationTimeline />
         <ExperienceAndCampus />
       </main>
+      <AmbientMusicPlayer />
     </div>
   );
 }
-
