@@ -1,0 +1,851 @@
+// ============================================================================
+// ATCHYUTESWAR GOTTUMUKKALA — ACADEMIC, PATENT & COLLEGIATE PORTFOLIO DATA
+// ============================================================================
+// Central configuration file powering the entire portfolio.
+// Real data has been populated from your resumes; patent titles/numbers and
+// additional college project slots are marked clearly for quick editing!
+// ============================================================================
+
+export interface PatentItem {
+  id: string;
+  title: string;
+  applicationNumber: string;
+  filingDate: string;
+  jurisdiction: string;
+  status: "Patent Filed" | "Published" | "Under Examination" | "Granted";
+  domain: string;
+  inventors: string[];
+  abstract: string;
+  keyClaims: string[];
+  relatedProjectId?: string;
+  citationText: string;
+  bibtex: string;
+}
+
+export interface ProjectItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  category:
+    | "AI, ML & Data Science"
+    | "Enterprise & Cloud (SAP / Web)"
+    | "Web3 & Blockchain"
+    | "College & Capstone Placeholders";
+  semester: string;
+  courseOrLab: string;
+  advisor?: string;
+  featured: boolean;
+  status: "Completed" | "Ongoing (Final Year)" | "Patent / Research Slot";
+  summary: string;
+  problemStatement: string;
+  methodology: string[];
+  outcomes: string[];
+  metrics: { label: string; value: string }[];
+  techStack: string[];
+  links: {
+    github?: string;
+    reportPdf?: string;
+    liveDemo?: string;
+    slides?: string;
+  };
+}
+
+export interface CertificationGroup {
+  id: string;
+  issuer: string;
+  category: string;
+  period: string;
+  badgeText: string;
+  credentialId?: string;
+  summary: string;
+  items: string[];
+}
+
+export interface SemesterRecord {
+  semester: string;
+  period: string;
+  status: "Completed" | "Current Semester" | "Upcoming (Final)";
+  sgpa?: string;
+  highlight: string;
+  courses: {
+    code: string;
+    name: string;
+    tag: "Core CS" | "Data Science" | "Systems" | "Capstone";
+  }[];
+}
+
+export interface AcademicRole {
+  id: string;
+  role: string;
+  organization: string;
+  departmentOrLab: string;
+  period: string;
+  location: string;
+  mentor?: string;
+  description: string;
+  highlights: string[];
+  tags: string[];
+}
+
+export interface CampusActivity {
+  id: string;
+  title: string;
+  organization: string;
+  category: "Leadership & Chapters" | "Open Source & Agile" | "Campus & Social Impact";
+  period: string;
+  badge: string;
+  description: string;
+  impactMetric?: string;
+  link?: string;
+}
+
+export const portfolioData = {
+  // --------------------------------------------------------------------------
+  // 1. IDENTITY & ACADEMIC METADATA (POPULATED FROM RESUMES)
+  // --------------------------------------------------------------------------
+  profile: {
+    monogram: "AG",
+    fullName: "Atchyuteswar Gottumukkala",
+    academicTitle:
+      "Final-Year B.Tech. CSE (Data Science) Undergraduate · SAP Certified ABAP Cloud & AI/Full-Stack Engineer",
+    degree: "Bachelor of Technology (B.Tech.) in Computer Science & Engineering (Data Science)",
+    specialization: "Data Science, Applied AI/ML, Enterprise SAP ABAP Cloud & Full-Stack Systems",
+    university: "Marri Laxman Reddy Institute of Technology and Management (MLRITM)",
+    department: "Department of Computer Science & Engineering (Data Science)",
+    location: "Hyderabad, Telangana, India",
+    phone: "+91 7702850277",
+    enrollmentYear: "2023",
+    graduationMonthYear: "March 2027",
+    graduationProgressPercent: 88, // Final Year (Sem VII -> Sem VIII March 2027)
+    currentSemesterLabel: "Semester VII · Final Year (Graduating March 2027)",
+    cgpa: "7.65 / 10.0",
+    rankOrDistinction: "SAP Certified (ABAP Cloud) · Patent Co-Inventor · Chapter Head (1,000+ Members)",
+    shortBio:
+      "Final-year Computer Science & Engineering (Data Science) undergraduate at MLRITM, Hyderabad (Class of March 2027). My collegiate work spans filed utility patents, multimodal AI mobile systems (Gemini 2.5 + ML Kit, custom NLP pipelines), SAP S/4HANA Clean Core & ABAP RAP enterprise engineering, and full-stack Web2/Web3 platforms.",
+    researchStatement:
+      "Across my undergraduate tenure (2023–2027), I have focused on bridging academic Data Science and core Computer Science fundamentals (DSA, OOP, DBMS, Compiler Design, Computer Networks) with real-world intellectual property and production systems—leading a 1,000+ member campus developer chapter, contributing to open-source, and filing collegiate patents.",
+    email: "atchyuteswar.gottumukkala@gmail.com",
+    altEmail: "yt.atchyut@gmail.com",
+    links: {
+      cvPdf: "#certifications",
+      googleScholar: "#patents",
+      github: "https://github.com/Atchyuteswar",
+      linkedin: "https://linkedin.com/in/Atchyuteswar",
+      freelanceSite: "https://atchyut.vercel.app",
+    },
+    freelanceBridge: {
+      enabled: true,
+      label: "Looking for my commercial & freelance software studio?",
+      ctaText: "Visit atchyut.vercel.app",
+      url: "https://atchyut.vercel.app",
+      description:
+        "This site serves as my dedicated Academic, Patent & Collegiate Monograph for MLRITM (2023–2027). To view my commercial client engagements, freelance web platforms, and studio services, visit my primary portfolio at atchyut.vercel.app.",
+      stats: [
+        { label: "Production Projects", value: "8+ Shipped" },
+        { label: "Cloud & AI Badges", value: "30+ Earned" },
+      ],
+    },
+  },
+
+  // --------------------------------------------------------------------------
+  // 2. RESEARCH & ENGINEERING VECTORS
+  // --------------------------------------------------------------------------
+  researchAreas: [
+    {
+      code: "RV-01",
+      title: "Applied AI, NLP & Multimodal Vision",
+      description:
+        "Dataset curation, lightweight NLP fine-tuning in Colab/FastAPI, and on-device/cloud multimodal inference with Gemini 2.5 Flash & ML Kit.",
+    },
+    {
+      code: "RV-02",
+      title: "Enterprise SAP ABAP Cloud & Clean Core",
+      description:
+        "SAP S/4HANA extensibility, ABAP RESTful Application Programming Model (RAP), CDS Views, and ABAP Dictionary architecture.",
+    },
+    {
+      code: "RV-03",
+      title: "Full-Stack Systems, Data Science & Web3",
+      description:
+        "Scalable Next.js, Kotlin Jetpack Compose, and Supabase/PostgreSQL architectures alongside BSV smart contracts and climate data repositories.",
+    },
+  ],
+
+  // --------------------------------------------------------------------------
+  // 3. FILED PATENTS & INTELLECTUAL PROPERTY (§ 01)
+  // (Ready for your exact patent titles & application numbers!)
+  // --------------------------------------------------------------------------
+  patents: [
+    {
+      id: "PAT-01",
+      title:
+        "[Patent #1 Placeholder — Replace with Your Filed Patent Title]",
+      applicationNumber: "2026410XXXXX (Update with Indian Patent Application No.)",
+      filingDate: "2025 / 2026",
+      jurisdiction: "Indian Patent Office (IPO) · Chennai / Hyderabad",
+      status: "Patent Filed",
+      domain: "Computer Science & Engineering (Data Science / AI Systems)",
+      inventors: [
+        "Atchyuteswar Gottumukkala",
+        "[Faculty Mentor / Co-Inventor Name — MLRITM]",
+      ],
+      abstract:
+        "Placeholder for your first filed utility patent at Marri Laxman Reddy Institute of Technology and Management (MLRITM). Share the exact patent title, application number, filing date, co-inventors, and a 2–3 line summary of the invention, and this registry card will display your official filing details.",
+      keyClaims: [
+        "Claim 1 Placeholder: Describe the core novel architecture, algorithm, or hardware-software workflow disclosed in your filing.",
+        "Claim 2 Placeholder: Describe the data processing pipeline, model optimization, or system integration claim.",
+        "Claim 3 Placeholder: Describe the empirical advantage or application scenario covered by the patent.",
+      ],
+      relatedProjectId: "PRJ-CAP-01",
+      citationText:
+        "Gottumukkala, Atchyuteswar, et al. \"[Your Patent Title Here].\" Indian Patent Application 2026410XXXXX, filed at Marri Laxman Reddy Institute of Technology and Management (MLRITM).",
+      bibtex: `@misc{gottumukkala2026patent1,
+  title={[Your Patent Title #1 Here]},
+  author={Gottumukkala, Atchyuteswar and [Co-Inventors]},
+  year={2026},
+  note={Indian Patent Application No. 2026410XXXXX, MLRITM Hyderabad (Filed)}
+}`,
+    },
+    {
+      id: "PAT-02",
+      title:
+        "[Patent #2 Placeholder — Replace with Your Second Filed Patent Title]",
+      applicationNumber: "2026410YYYYY (Update with Indian Patent Application No.)",
+      filingDate: "2025 / 2026",
+      jurisdiction: "Indian Patent Office (IPO) · Chennai / Hyderabad",
+      status: "Patent Filed",
+      domain: "Intelligent Systems & Data Engineering",
+      inventors: [
+        "Atchyuteswar Gottumukkala",
+        "[Faculty Mentor / Co-Inventor Name — MLRITM]",
+      ],
+      abstract:
+        "Placeholder for your second filed patent disclosure. You can add as many patents as you have filed during your B.Tech at MLRITM—each entry supports official application numbers, status stamps (Filed / Published / Granted), inventor lists, technical claims, and one-click BibTeX citations.",
+      keyClaims: [
+        "Claim 1 Placeholder: Primary system or method claim from your patent specification.",
+        "Claim 2 Placeholder: Secondary apparatus or algorithmic workflow claim.",
+      ],
+      relatedProjectId: "PRJ-CAP-02",
+      citationText:
+        "Gottumukkala, Atchyuteswar, et al. \"[Your Second Patent Title Here].\" Indian Patent Application 2026410YYYYY, filed at MLRITM Hyderabad.",
+      bibtex: `@misc{gottumukkala2026patent2,
+  title={[Your Patent Title #2 Here]},
+  author={Gottumukkala, Atchyuteswar and [Co-Inventors]},
+  year={2026},
+  note={Indian Patent Application No. 2026410YYYYY, MLRITM Hyderabad (Filed)}
+}`,
+    },
+  ] as PatentItem[],
+
+  // --------------------------------------------------------------------------
+  // 4. REAL PROJECTS + COLLEGE PROJECT PLACEHOLDERS (§ 02)
+  // --------------------------------------------------------------------------
+  projects: [
+    {
+      id: "PRJ-01",
+      title: "Volt — AI-Powered Multimodal Nutrition & Hydration Tracker",
+      subtitle: "Native Android (Kotlin + Jetpack Compose) · Gemini 2.5 Flash · ML Kit · Supabase",
+      category: "AI, ML & Data Science",
+      semester: "Sem IV (March 2025)",
+      courseOrLab: "Applied AI & Mobile Systems Engineering",
+      featured: true,
+      status: "Completed",
+      summary:
+        "Built a 5,500+ LOC native Android application in Kotlin and Jetpack Compose for AI-powered nutrition and hydration tracking via camera vision, voice input, and barcode scanning using Google Gemini 2.5 Flash and ML Kit.",
+      problemStatement:
+        "Manual calorie and macro logging suffers from high user drop-off due to tedious text search and inaccurate portion estimation for regional Indian and global meals.",
+      methodology: [
+        "Engineered a multimodal food-logging pipeline combining camera vision, natural voice input, and ML Kit barcode scanning powered by Google Gemini 2.5 Flash.",
+        "Built deep nutritional analytics dashboards, an interactive Android Glance home-screen widget, and an AI Coach that synthesizes personalized weekly debriefs from longitudinal user telemetry.",
+        "Architected a serverless backend on Supabase (PostgreSQL, Row-Level Security, Edge Functions, Auth) integrated with RevenueCat subscription scaffolding across ~5,500 lines of idiomatic Kotlin.",
+      ],
+      outcomes: [
+        "Delivered a production-grade native Android codebase (~5,500 LOC) with end-to-end multimodal AI inference.",
+        "Unified three input modalities (Vision, Voice, Barcode) into a single low-latency Supabase data model.",
+      ],
+      metrics: [
+        { label: "Codebase Scale", value: "~5,500 LOC" },
+        { label: "AI Modalities", value: "Vision + Voice" },
+        { label: "Core Engine", value: "Gemini 2.5 Flash" },
+      ],
+      techStack: [
+        "Kotlin",
+        "Jetpack Compose",
+        "Android Glance",
+        "Gemini 2.5 Flash",
+        "Google ML Kit",
+        "Supabase",
+        "PostgreSQL",
+        "Edge Functions",
+        "RevenueCat",
+      ],
+      links: {
+        github: "https://github.com/Atchyuteswar",
+      },
+    },
+    {
+      id: "PRJ-02",
+      title: "Aira — Custom NLP Emotional Support Companion & FastAPI Engine",
+      subtitle: "Dataset Curation · Model Fine-Tuning (Google Colab) · FastAPI · React Native (Expo)",
+      category: "AI, ML & Data Science",
+      semester: "Sem V (August 2025)",
+      courseOrLab: "Data Science & Natural Language Processing",
+      featured: true,
+      status: "Completed",
+      summary:
+        "Curated a specialized emotional-support conversational dataset, fine-tuned a lightweight NLP model in Google Colab, and deployed it via a FastAPI inference server integrated with a cross-platform React Native (Expo) mobile app.",
+      problemStatement:
+        "Generic off-the-shelf LLM wrappers often lack empathetic tone calibration and lightweight deployment characteristics needed for accessible student mental-wellness support.",
+      methodology: [
+        "Designed and cleaned a custom supervised dataset focused on empathetic active listening and emotional support dialogues.",
+        "Trained and evaluated a lightweight NLP model in Google Colab, optimizing for conversational coherence and low-latency CPU/cloud inference.",
+        "Exposed the trained model via an asynchronous Python FastAPI REST service and built a responsive React Native (Expo) mobile client.",
+      ],
+      outcomes: [
+        "Successfully demonstrated the complete Data Science lifecycle: raw dataset curation → Colab model training → FastAPI serving → mobile UI deployment.",
+        "Published live interactive mobile build on Expo (`expo.dev/accounts/kazexyt/projects/aira-frontend`).",
+      ],
+      metrics: [
+        { label: "Pipeline", value: "End-to-End NLP" },
+        { label: "Backend", value: "Python FastAPI" },
+        { label: "Mobile Client", value: "React Native Expo" },
+      ],
+      techStack: [
+        "Python",
+        "NLP / Model Training",
+        "Dataset Curation",
+        "Google Colab",
+        "FastAPI",
+        "React Native",
+        "Expo",
+      ],
+      links: {
+        github: "https://github.com/Atchyuteswar",
+        liveDemo: "https://expo.dev/accounts/kazexyt/projects/aira-frontend",
+      },
+    },
+    {
+      id: "PRJ-03",
+      title: "SAP S/4HANA Clean Core & ABAP RAP Business Object Suite",
+      subtitle: "ABAP RESTful Application Programming Model · CDS Views · ADT/Eclipse · BOR",
+      category: "Enterprise & Cloud (SAP / Web)",
+      semester: "Sem VII (Aug – Sep 2026)",
+      courseOrLab: "Naxrita Devcon Associate — Enterprise Systems",
+      featured: true,
+      status: "Completed",
+      summary:
+        "Independently architected and delivered multiple enterprise business objects and data models using ABAP RAP, Core Data Services (CDS) Views, and ABAP Dictionary in ADT/Eclipse, strictly validated against SAP S/4HANA Clean Core extensibility guidelines.",
+      problemStatement:
+        "Legacy ERP modifications tightly couple custom code to core tables, breaking upgrade paths in cloud-native SAP S/4HANA environments.",
+      methodology: [
+        "Modeled normalized database tables, domains, and data elements in the ABAP Dictionary (SE11/SE80) and exposed semantic layers via CDS Views.",
+        "Implemented Behavior Definitions and Business Objects using the ABAP RESTful Application Programming Model (RAP) inside ADT/Eclipse.",
+        "Developed classical and interactive ALV reports, Smart Forms, and Business Object Repository (BOR) integrations adhering to Clean Core principles.",
+      ],
+      outcomes: [
+        "Earned official SAP Certified Back-End Developer — ABAP Cloud credential (Sep 2026).",
+        "Delivered multiple end-to-end RAP applications validated against SAP S/4HANA Clean Core standards.",
+      ],
+      metrics: [
+        { label: "Architecture", value: "SAP Clean Core" },
+        { label: "Framework", value: "ABAP RAP + CDS" },
+        { label: "Certification", value: "SAP Certified" },
+      ],
+      techStack: [
+        "SAP ABAP Cloud",
+        "ABAP RAP",
+        "CDS Views",
+        "OO ABAP",
+        "ABAP Dictionary",
+        "SAP S/4HANA",
+        "ADT / Eclipse",
+        "ALV Reports",
+      ],
+      links: {
+        github: "https://github.com/Atchyuteswar",
+      },
+    },
+    {
+      id: "PRJ-04",
+      title: "Cryptolit — Full-Stack Web3 Wallet & Decentralized Bounty Platform",
+      subtitle: "Next.js · BSV Blockchain · Smart Contracts · Neon DB · Prisma ORM",
+      category: "Web3 & Blockchain",
+      semester: "Sem III (July 2024)",
+      courseOrLab: "Timechain Labs Blockchain Fellowship",
+      featured: true,
+      status: "Completed",
+      summary:
+        "Engineered a full-stack Web3 platform supporting raw cryptographic wallet creation, cloud wallet synchronization, saved user profiles, and smart-contract-backed bounty workflows.",
+      problemStatement:
+        "Onboarding users to Web3 applications requires bridging raw cryptographic key management with familiar cloud-backed profile and bounty experiences.",
+      methodology: [
+        "Implemented BSV blockchain smart contract interactions, raw wallet keypair generation, and cloud wallet authentication flows.",
+        "Designed the relational persistence layer using PostgreSQL on Neon DB with type-safe Prisma ORM migrations.",
+        "Built a responsive Next.js full-stack interface deployed on Vercel (`cryptolit.vercel.app`).",
+      ],
+      outcomes: [
+        "Shipped live Web3 platform with integrated Raw Wallet, Cloud Wallet, Saved Profiles, and Bounty modules.",
+        "Awarded 'Skilled Developer' certification from Timechain Labs.",
+      ],
+      metrics: [
+        { label: "Wallet Modes", value: "Raw + Cloud" },
+        { label: "Database", value: "Neon + Prisma" },
+        { label: "Deployment", value: "Live on Vercel" },
+      ],
+      techStack: [
+        "Next.js",
+        "TypeScript",
+        "BSV Blockchain",
+        "Smart Contracts",
+        "Neon DB",
+        "Prisma ORM",
+        "Tailwind CSS",
+      ],
+      links: {
+        github: "https://github.com/Atchyuteswar",
+        liveDemo: "https://cryptolit.vercel.app",
+      },
+    },
+    {
+      id: "PRJ-05",
+      title: "BBH-MLRITM — Campus Blockchain Chapter Portal & Event Hub",
+      subtitle: "Official College Club Platform for Big Blockers Hyderabad @ MLRITM",
+      category: "Web3 & Blockchain",
+      semester: "Sem III (December 2024)",
+      courseOrLab: "MLRITM Campus Technical Society",
+      featured: false,
+      status: "Completed",
+      summary:
+        "Designed and deployed the official campus chapter website for Big Blockers Hyderabad at MLRITM (`bbh-mlritm.vercel.app`), showcasing the student leadership roster, technical bootcamps, and event gallery.",
+      problemStatement:
+        "Needed a central digital hub at MLRITM to coordinate blockchain bootcamps, workshop registrations, and event archives for 1,000+ student community members.",
+      methodology: [
+        "Built a fast, mobile-first Next.js web portal featuring structured event listings, core team directories, and workshop photo galleries.",
+        "Deployed with continuous integration on Vercel for instant updates during campus hackathons and seminars.",
+      ],
+      outcomes: [
+        "Supported campus outreach across 3+ major blockchain bootcamps and workshops training 700+ students.",
+      ],
+      metrics: [
+        { label: "Chapter Reach", value: "1,000+ Members" },
+        { label: "Students Trained", value: "700+" },
+        { label: "Status", value: "Live Portal" },
+      ],
+      techStack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+      links: {
+        github: "https://github.com/Atchyuteswar",
+        liveDemo: "https://bbh-mlritm.vercel.app",
+      },
+    },
+    {
+      id: "PRJ-06",
+      title: "Climate Action Front (CAF) — Climate Governance & Data Repository",
+      subtitle: "Policy & Investor Decision-Support Platform + Climate Data Analysis",
+      category: "Enterprise & Cloud (SAP / Web)",
+      semester: "Sem III–IV (Dec 2024 – Jan 2025)",
+      courseOrLab: "Data Science & Social Impact Engineering",
+      featured: false,
+      status: "Completed",
+      summary:
+        "Developed the web platform (`climate-action-front.vercel.app`) and organized the underlying climate data repository for a Delhi-based climate governance initiative, enabling data-driven policy and investor decisions.",
+      problemStatement:
+        "Climate policy researchers and green investors needed structured access to curated environmental datasets, governance publications, and organizational resources.",
+      methodology: [
+        "Architected and deployed the full organization portal with team directories, policy blog publishing, and resource libraries.",
+        "Organized and maintained the climate data repository, analyzing datasets to extract actionable insights for climate governance stakeholders.",
+      ],
+      outcomes: [
+        "Live production platform serving climate governance insights and research publications.",
+      ],
+      metrics: [
+        { label: "Focus", value: "Climate Data" },
+        { label: "Role", value: "Tech Contributor" },
+        { label: "Platform", value: "Next.js / Vercel" },
+      ],
+      techStack: ["Next.js", "Data Analysis", "Python", "Tailwind CSS", "Vercel"],
+      links: {
+        github: "https://github.com/Atchyuteswar",
+        liveDemo: "https://climate-action-front.vercel.app",
+      },
+    },
+    {
+      id: "PRJ-07",
+      title: "Simple Todo REST API & Earth Leaders Sustainability Portal",
+      subtitle: "Swagger OpenAPI Backend + Interactive Environmental Education Web App",
+      category: "Enterprise & Cloud (SAP / Web)",
+      semester: "Sem II–III (Jan – Aug 2024)",
+      courseOrLab: "Full-Stack Web Engineering & API Design",
+      featured: false,
+      status: "Completed",
+      summary:
+        "A pair of early undergraduate web systems: (1) a RESTful task service documented with interactive Swagger/OpenAPI specs, and (2) 'Earth Leaders' & 'Dhara', interactive web platforms promoting ecological restoration.",
+      problemStatement:
+        "Demonstrating clean REST API contract documentation with Swagger alongside engaging educational web interfaces.",
+      methodology: [
+        "Built RESTful CRUD endpoints with full Swagger UI schema documentation (`simple-todo-two-coral.vercel.app/swagger`).",
+        "Developed interactive gamified awareness modules in Earth Leaders (`earth-leaders.vercel.app`) and team qualification portal Dhara (`dhara-website.netlify.app`).",
+      ],
+      outcomes: [
+        "3 live deployed web applications demonstrating progressive mastery of REST APIs, Svelte, and Next.js.",
+      ],
+      metrics: [
+        { label: "API Spec", value: "Swagger OpenAPI" },
+        { label: "Deployments", value: "3 Live Apps" },
+        { label: "Year", value: "2024" },
+      ],
+      techStack: ["Next.js", "Svelte", "Node.js", "REST API", "Swagger", "Vercel", "Netlify"],
+      links: {
+        liveDemo: "https://simple-todo-two-coral.vercel.app/swagger",
+        github: "https://github.com/Atchyuteswar",
+      },
+    },
+    {
+      id: "PRJ-CAP-01",
+      title: "[College Major / Mini Project Placeholder #1 — Ready for Your Details]",
+      subtitle: "B.Tech. CSE (Data Science) Academic / Patent-Linked Project Slot",
+      category: "College & Capstone Placeholders",
+      semester: "Sem VI / VII (2026)",
+      courseOrLab: "MLRITM Dept. of CSE (Data Science)",
+      advisor: "[Faculty Guide Name]",
+      featured: false,
+      status: "Patent / Research Slot",
+      summary:
+        "Placeholder slot for your B.Tech. Major Project, Mini Project, or Patent-backed college prototype at MLRITM. Share your project title, abstract, and tech stack anytime to replace this card.",
+      problemStatement:
+        "Replace with the problem statement addressed by your college capstone or mini project.",
+      methodology: [
+        "Step 1: Data collection / hardware setup / system architecture.",
+        "Step 2: Core algorithm, ML model, or full-stack implementation.",
+        "Step 3: Evaluation, testing, and faculty review / patent filing.",
+      ],
+      outcomes: [
+        "Ready to link directly to your filed patent (PAT-01) and B.Tech thesis report.",
+      ],
+      metrics: [
+        { label: "Type", value: "Academic Capstone" },
+        { label: "Institution", value: "MLRITM" },
+        { label: "Batch", value: "2023–2027" },
+      ],
+      techStack: ["Python", "Data Science", "Machine Learning", "Full-Stack"],
+      links: {
+        github: "https://github.com/Atchyuteswar",
+      },
+    },
+    {
+      id: "PRJ-CAP-02",
+      title: "[College Lab / Coursework Project Placeholder #2 — Ready for Your Details]",
+      subtitle: "Additional Academic Project Slot (DBMS / Compiler Design / Networks / AI)",
+      category: "College & Capstone Placeholders",
+      semester: "Sem V / VI (2025–2026)",
+      courseOrLab: "MLRITM Coursework / Research Lab",
+      featured: false,
+      status: "Patent / Research Slot",
+      summary:
+        "Second placeholder slot for any additional college projects, hackathons, or patent prototypes you want to showcase. Easily duplicate or edit in `src/data/portfolioData.ts`.",
+      problemStatement:
+        "Replace with the technical challenge explored in this college project.",
+      methodology: [
+        "Describe your architecture, dataset, or implementation approach.",
+        "Highlight key experiments or benchmarks.",
+      ],
+      outcomes: [
+        "Highlight academic grade, demo outcome, or patent disclosure.",
+      ],
+      metrics: [
+        { label: "Category", value: "College Project" },
+        { label: "Status", value: "Placeholder" },
+        { label: "Editable", value: "1-Click TS File" },
+      ],
+      techStack: ["Java", "Python", "SQL", "Next.js"],
+      links: {
+        github: "https://github.com/Atchyuteswar",
+      },
+    },
+  ] as ProjectItem[],
+
+  // --------------------------------------------------------------------------
+  // 5. CERTIFICATIONS, CREDENTIALS & TECHNICAL BADGES (§ 03)
+  // (Populated from all 7 resumes!)
+  // --------------------------------------------------------------------------
+  certifications: [
+    {
+      id: "CERT-SAP",
+      issuer: "SAP",
+      category: "Enterprise Cloud Certification",
+      period: "Issued Sep 2026 · Valid Sep 2026 – Sep 2027",
+      badgeText: "Official SAP Certified",
+      credentialId: "09dc84ad-438c-4d0e-a216-29110195af66",
+      summary:
+        "SAP Certified – Back-End Developer, ABAP Cloud. Validates proficiency in ABAP RESTful Application Programming Model (RAP), Core Data Services (CDS), Object-Oriented ABAP, and Clean Core extensibility for SAP S/4HANA.",
+      items: [
+        "ABAP RESTful Application Programming Model (RAP)",
+        "Core Data Services (CDS Views) & ABAP Dictionary",
+        "SAP S/4HANA Clean Core Extensibility",
+        "ABAP Development Tools (ADT / Eclipse) & OO ABAP",
+      ],
+    },
+    {
+      id: "CERT-CLOUD-AI",
+      issuer: "Google Cloud, AWS Academy & NVIDIA DLI",
+      category: "Cloud Computing & Generative AI (18+ Credentials)",
+      period: "Sep 2023 – Aug 2026",
+      badgeText: "AWS + GCP + NVIDIA",
+      summary:
+        "Completed AWS Academy Cloud Foundations (20-hr badge, Aug 2026), NVIDIA Deep Learning Institute's 'Generative AI Explained', Google Cloud Computing Foundations Certificate, and 16 hands-on Google Cloud Skill Badges.",
+      items: [
+        "AWS Academy Graduate — Cloud Foundations (Aug 2026)",
+        "NVIDIA Deep Learning Institute — Generative AI Explained",
+        "Manage Kubernetes in Google Cloud & Load Balancing on Compute Engine",
+        "Explore Generative AI with the Gemini API in Vertex AI",
+        "Inspect Rich Documents with Gemini Multimodality & Multimodal RAG",
+        "Develop GenAI Apps with Gemini & Streamlit + Prompt Design in Vertex AI",
+        "Build Real World AI Applications with Gemini & Imagen",
+        "Prepare Data for ML APIs & Google Cloud Computing Foundations (4-Course Suite)",
+      ],
+    },
+    {
+      id: "CERT-CISCO",
+      issuer: "Cisco Networking Academy",
+      category: "Data Science, AI, Cybersecurity & Networking (12+ Courses)",
+      period: "2024 – 2026",
+      badgeText: "12+ Cisco Credentials",
+      summary:
+        "Comprehensive academic credential track across Data Analytics, Python programming, Modern AI, Cybersecurity, and Computer Networking through Cisco Networking Academy.",
+      items: [
+        "Data Analytics Essentials & Introduction to Data Science",
+        "Introduction to Modern AI & Apply AI: Analyze Customer Reviews",
+        "Python Essentials 1 & Python Essentials 2",
+        "Junior Cybersecurity Analyst Career Path & Security/Connectivity Support",
+        "Network Technician Career Path, Network Addressing & OS/Hardware Support",
+        "CCNA: Introduction to Networks & CCNA 200-301 Track",
+      ],
+    },
+    {
+      id: "CERT-DEV",
+      issuer: "Microsoft, BSV Academy, Postman, FreeCodeCamp & EF SET",
+      category: "Software Engineering, Security, Web3 & Language Proficiency",
+      period: "2024 – 2025",
+      badgeText: "Multi-Domain Verified",
+      summary:
+        "Industry certifications spanning API engineering, Web3 smart contracts, security operations, frontend/DSA foundations, and C1 Advanced English proficiency.",
+      items: [
+        "EF SET English Certificate — Score: 67/100 (C1 Advanced, Sep 2025)",
+        "Microsoft — Copilot for Security Ninja Training",
+        "BSV Academy — Bitcoin Script & Bitcoin Enterprise",
+        "Timechain Labs — Skilled Developer Credential",
+        "Postman — API Fundamentals Student Expert",
+        "FreeCodeCamp — JavaScript Algorithms & Data Structures, Responsive Web Design, Front End Libraries",
+        "Unity — Unity Essentials Pathway",
+      ],
+    },
+  ] as CertificationGroup[],
+
+  // --------------------------------------------------------------------------
+  // 6. EDUCATION & ROAD TO MARCH 2027 (§ 04)
+  // --------------------------------------------------------------------------
+  education: {
+    degreeTitle: "Bachelor of Technology (B.Tech.) — Computer Science & Engineering (Data Science)",
+    institution: "Marri Laxman Reddy Institute of Technology and Management (MLRITM)",
+    location: "Hyderabad, Telangana, India",
+    duration: "2023 — March 2027 (Expected Graduation)",
+    cgpa: "7.65 / 10.0",
+    priorEducation: {
+      level: "Intermediate MPC (Mathematics, Physics, Chemistry — Science)",
+      institution: "Sri Chaitanya Junior Kalasala, Telangana, India",
+      duration: "2021 — 2023",
+    },
+    thesisTitle:
+      "Applied Data Science, Multimodal AI Systems & Enterprise Cloud Extensibility (B.Tech. Capstone & Patent Portfolio)",
+    advisor: "Department of CSE (Data Science), MLRITM",
+    honors: [
+      "Filed Collegiate Utility Patents as an Undergraduate Innovator at MLRITM",
+      "SAP Certified Back-End Developer — ABAP Cloud (Credential ID: 09dc84ad-438c-4d0e-a216-29110195af66)",
+      "Head of Hyderabad Chapter — Big Blockers Community (Grew chapter to 1,000+ members & trained 700+ students)",
+      "Earned 30+ Verified Industry Certifications & Cloud/AI Skill Badges (Google Cloud, AWS, NVIDIA, Cisco, Microsoft)",
+    ],
+    semesters: [
+      {
+        semester: "Year 1 (Sem I & II)",
+        period: "2023 – 2024",
+        status: "Completed",
+        sgpa: "Completed",
+        highlight: "Foundational Programming, Data Structures, Cloud Foundations & Swecha Volunteering",
+        courses: [
+          { code: "CS101", name: "Programming for Problem Solving & Data Structures", tag: "Core CS" },
+          { code: "MA101", name: "Linear Algebra, Calculus & Statistical Methods", tag: "Data Science" },
+          { code: "CS104", name: "Object-Oriented Programming (Python & Java)", tag: "Core CS" },
+          { code: "GCP-23", name: "Google Cloud Computing Foundations & ML APIs", tag: "Systems" },
+        ],
+      },
+      {
+        semester: "Year 2 (Sem III & IV)",
+        period: "2024 – 2025",
+        status: "Completed",
+        sgpa: "Completed",
+        highlight: "DBMS, Operating Systems, Timechain Labs Web3 Internship, GSSoC '24 & Volt AI App",
+        courses: [
+          { code: "CS201", name: "Database Management Systems (DBMS) & SQL", tag: "Core CS" },
+          { code: "CS202", name: "Operating Systems & Process Synchronization", tag: "Systems" },
+          { code: "DS204", name: "Exploratory Data Analysis with Python, R & Power BI", tag: "Data Science" },
+          { code: "CS206", name: "Software Development & REST API Engineering", tag: "Systems" },
+        ],
+      },
+      {
+        semester: "Year 3 (Sem V & VI)",
+        period: "2025 – 2026",
+        status: "Completed",
+        sgpa: "Completed",
+        highlight: "Computer Networks, Compiler Design, Aira NLP Companion & Patent Disclosures",
+        courses: [
+          { code: "CS301", name: "Computer Networks & Protocol Engineering", tag: "Core CS" },
+          { code: "CS302", name: "Compiler Design & Formal Languages", tag: "Core CS" },
+          { code: "DS305", name: "Machine Learning, NLP & Dataset Curation", tag: "Data Science" },
+          { code: "IP390", name: "Collegiate Patent Drafting & Research Prototyping", tag: "Capstone" },
+        ],
+      },
+      {
+        semester: "Semester VII (Current)",
+        period: "Aug 2026 – Dec 2026",
+        status: "Current Semester",
+        sgpa: "7.65 CGPA",
+        highlight: "Naxrita SAP ABAP Internship, SAP Cloud Certification, AWS Foundations & Major Project Phase I",
+        courses: [
+          { code: "CS401", name: "Enterprise Systems & SAP ABAP Cloud (RAP / CDS)", tag: "Systems" },
+          { code: "DS402", name: "Deep Learning & Multimodal Generative AI (Gemini / Vertex)", tag: "Data Science" },
+          { code: "CS498", name: "B.Tech. Major Capstone Project — Phase I", tag: "Capstone" },
+        ],
+      },
+      {
+        semester: "Semester VIII (Graduation)",
+        period: "Jan 2027 – March 2027",
+        status: "Upcoming (Final)",
+        sgpa: "Graduating Mar 2027",
+        highlight: "Final B.Tech. Thesis Defense, Patent Prosecution & Degree Conferral (March 2027)",
+        courses: [
+          { code: "CS499", name: "B.Tech. Major Capstone Project — Phase II & Final Defense", tag: "Capstone" },
+          { code: "DS410", name: "Production Data Engineering & Enterprise Deployment", tag: "Data Science" },
+        ],
+      },
+    ] as SemesterRecord[],
+  },
+
+  // --------------------------------------------------------------------------
+  // 7. INTERNSHIPS & TECHNICAL EXPERIENCE (§ 05)
+  // --------------------------------------------------------------------------
+  academicExperience: [
+    {
+      id: "EXP-01",
+      role: "Devcon Associate — SAP ABAP Development Intern",
+      organization: "Naxrita",
+      departmentOrLab: "Enterprise SAP S/4HANA & ABAP Cloud Practice",
+      period: "Aug 2026 — Sep 2026",
+      location: "Hyderabad, Telangana, India · On-site",
+      description:
+        "Completed an intensive on-site enterprise engineering internship focused on SAP S/4HANA Clean Core extensibility, ABAP RESTful Application Programming Model (RAP), and Core Data Services (CDS).",
+      highlights: [
+        "Built ABAP RESTful Application Programming Model (RAP) applications in ADT/Eclipse, covering behavior definitions and business object modeling.",
+        "Created CDS Views for semantic data modeling aligned with SAP's Clean Core principles for S/4HANA extensibility.",
+        "Trained in core SAP ABAP development including T-Codes (SE80, SE11, SE37, SE24), Domains, Data Elements, and Database Tables in the ABAP Dictionary.",
+        "Developed classical and interactive ALV reports, worked with the Business Object Repository (BOR) for OO ABAP integration, and independently delivered multiple RAP projects.",
+      ],
+      tags: ["SAP ABAP Cloud", "ABAP RAP", "CDS Views", "Clean Core", "SAP S/4HANA", "ADT/Eclipse"],
+    },
+    {
+      id: "EXP-02",
+      role: "Tech Contributor & Climate Data Repository Lead",
+      organization: "Climate Action Front (CAF)",
+      departmentOrLab: "Climate Governance & Data Analytics Team",
+      period: "Dec 2024 — Present",
+      location: "Delhi, India · Remote",
+      description:
+        "Driving web engineering and environmental dataset curation to support climate governance transparency and investor decision-making.",
+      highlights: [
+        "Developed and deployed the official CAF web platform (climate-action-front.vercel.app) to facilitate timely climate governance information.",
+        "Organized and maintained the central climate data repository; analyzed datasets to generate actionable insights for clients in climate policy and investment.",
+      ],
+      tags: ["Next.js", "Data Analysis", "Data Repositories", "Climate Tech", "Vercel"],
+    },
+    {
+      id: "EXP-03",
+      role: "Blockchain Developer Intern",
+      organization: "Timechain Labs",
+      departmentOrLab: "Full-Stack Web3 & Smart Contract Engineering",
+      period: "Jun 2024 — Oct 2024",
+      location: "Remote",
+      description:
+        "Engineered full-stack Web2 and Web3 applications using Next.js, Node.js, Svelte, and BSV smart contracts.",
+      highlights: [
+        "Implemented Web3 smart contract and multi-mode wallet functionality in the Cryptolit platform (cryptolit.vercel.app).",
+        "Built full-stack web applications using Next.js, Node.js, and Svelte, including a RESTful To-Do application documented with Swagger OpenAPI.",
+        "Managed relational database schemas and migrations using Neon DB (Serverless PostgreSQL) and Prisma ORM.",
+      ],
+      tags: ["Next.js", "Svelte", "Node.js", "Web3 / Smart Contracts", "Neon DB", "Prisma ORM", "Swagger"],
+    },
+    {
+      id: "EXP-04",
+      role: "Scrum Master Intern & Open-Source Volunteer",
+      organization: "Swecha Telangana & GirlScript Summer of Code (GSSoC '24)",
+      departmentOrLab: "Agile Delivery & Open-Source Engineering",
+      period: "Oct 2023 — Dec 2025",
+      location: "Hyderabad, India & Remote",
+      description:
+        "Combined Agile project leadership at Swecha Telangana with open-source code contributions during GirlScript Summer of Code 2024.",
+      highlights: [
+        "Swecha Telangana (May – Aug 2024): Led Agile ceremonies (sprint planning, standups, retrospectives) as a certified Scrum Master across 2 internal projects, improving delivery timelines by 90%.",
+        "GirlScript Summer of Code 2024 (Oct – Nov 2024): Fixed 10+ bugs and implemented 10+ features across open-source web repositories, earning the 'Contributor (WoB)' badge.",
+      ],
+      tags: ["Agile / Scrum Master", "Open Source", "GSSoC 2024", "Swecha Telangana", "Web Engineering"],
+    },
+  ] as AcademicRole[],
+
+  // --------------------------------------------------------------------------
+  // 8. CAMPUS LEADERSHIP, CLUBS & EXTRACURRICULARS (§ 06)
+  // --------------------------------------------------------------------------
+  campusLife: [
+    {
+      id: "CL-01",
+      title: "Head of Hyderabad Chapter",
+      organization: "Big Blockers Community (MLRITM & Hyderabad Chapter)",
+      category: "Leadership & Chapters",
+      period: "Sep 2024 — Aug 2025",
+      badge: "1,000+ Chapter Members",
+      description:
+        "Led the Hyderabad and MLRITM collegiate chapter, spearheading community outreach across 3+ major blockchain events and bootcamps. Conducted hands-on workshops on smart contract development and legal/real-world Web3 applications.",
+      impactMetric: "Grew Chapter to 1,000+ Members · Trained 700+ Students & Professionals",
+      link: "https://bbh-mlritm.vercel.app",
+    },
+    {
+      id: "CL-02",
+      title: "Certified Scrum Master & Volunteer Staff",
+      organization: "Swecha Telangana (Free & Open-Source Software Movement)",
+      category: "Campus & Social Impact",
+      period: "Oct 2023 — Dec 2025",
+      badge: "90% Faster Sprint Delivery",
+      description:
+        "Contributed over two years to statewide education, open-source software adoption, and social-impact engineering campaigns. Served as Scrum Master (May–Aug 2024) facilitating Agile ceremonies for internal engineering teams.",
+      impactMetric: "2+ Years Active Service · 2 Internal Projects Led as Scrum Master",
+    },
+    {
+      id: "CL-03",
+      title: "Open Source Contributor — Winter of Blockchain (WoB)",
+      organization: "GirlScript Summer of Code (GSSoC) 2024",
+      category: "Open Source & Agile",
+      period: "Oct 2024 — Nov 2024",
+      badge: "Contributor (WoB) Badge",
+      description:
+        "Collaborated with project maintainers across distributed open-source repositories, resolving 10+ bug reports and shipping 10+ frontend and full-stack feature enhancements.",
+      impactMetric: "10+ Features & 10+ Bugs Resolved",
+    },
+    {
+      id: "CL-04",
+      title: "Algorithmic Problem Solving & Competitive Coding",
+      organization: "LeetCode, HackerRank & GeeksforGeeks",
+      category: "Leadership & Chapters",
+      period: "2023 — 2027",
+      badge: "DSA & Core CS",
+      description:
+        "Active problem solver practicing Data Structures, Algorithms, Object-Oriented Programming (Java, Python, Kotlin), and SQL query optimization alongside B.Tech coursework at MLRITM.",
+      impactMetric: "50+ DSA Problems Solved · C1 Advanced English (EF SET 67/100)",
+    },
+  ] as CampusActivity[],
+};
