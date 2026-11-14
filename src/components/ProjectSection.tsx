@@ -12,6 +12,12 @@ import {
   CheckCircle2,
   FlaskConical,
   Layers,
+  BarChart3,
+  Cpu,
+  AlertTriangle,
+  Sparkles,
+  Database,
+  Tag,
 } from "lucide-react";
 
 const CATEGORIES = [
@@ -159,9 +165,17 @@ export default function ProjectSection() {
                   {/* Main Content */}
                   <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
                     <div className="space-y-1.5">
-                      <div className="font-mono text-[10px] sm:text-[11px] text-[#1D3557] dark:text-[#6CA0DC] break-words">
-                        {project.courseOrLab}
-                        {project.advisor ? ` · Guide: ${project.advisor}` : ""}
+                      <div className="flex flex-wrap items-center justify-between gap-1.5">
+                        <div className="font-mono text-[10px] sm:text-[11px] text-[#1D3557] dark:text-[#6CA0DC] break-words">
+                          {project.courseOrLab}
+                          {project.advisor ? ` · Guide: ${project.advisor}` : ""}
+                        </div>
+                        {(project.benchmarkTable || project.caseStudySections) && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#9E2A2B]/10 text-[#9E2A2B] dark:bg-[#E06D53]/15 dark:text-[#E06D53] border border-[#9E2A2B]/30 dark:border-[#E06D53]/30 shrink-0">
+                            <BarChart3 className="w-3 h-3" />
+                            <span>Case Study + Benchmark</span>
+                          </span>
+                        )}
                       </div>
                       <h3 className="font-serif text-lg sm:text-xl font-medium text-[#161615] dark:text-[#ECE8E1] leading-snug break-words">
                         {project.title}
@@ -215,10 +229,25 @@ export default function ProjectSection() {
                     className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#9E2A2B] dark:text-[#E06D53] hover:underline py-1"
                   >
                     <FlaskConical className="w-3.5 h-3.5 shrink-0" />
-                    <span>Inspect Technical Dossier →</span>
+                    <span>
+                      {project.caseStudySections
+                        ? "Read Full Case Study →"
+                        : "Inspect Technical Dossier →"}
+                    </span>
                   </button>
 
                   <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                    {project.links.huggingFace && (
+                      <a
+                        href={project.links.huggingFace}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 sm:p-1.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] text-[#52504C] dark:text-[#A7ACB4] hover:text-[#161615] dark:hover:text-white"
+                        title="Hugging Face Model Hub"
+                      >
+                        <Database className="w-3.5 h-3.5" />
+                      </a>
+                    )}
                     {project.links.github && (
                       <a
                         href={project.links.github}
@@ -318,7 +347,7 @@ export default function ProjectSection() {
             onClick={() => setSelectedProject(null)}
           >
             <div
-              className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-xl border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] shadow-2xl p-4 sm:p-8 space-y-5 sm:space-y-6"
+              className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-xl border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] shadow-2xl p-4 sm:p-8 space-y-5 sm:space-y-6"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
@@ -359,6 +388,59 @@ export default function ProjectSection() {
                 </p>
               </div>
 
+              {/* Held-Out Test Benchmark Table (when available, e.g., WasteAI) */}
+              {selectedProject.benchmarkTable &&
+                selectedProject.benchmarkTable.rows.length > 0 && (
+                  <div className="space-y-2.5">
+                    <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
+                      <BarChart3 className="w-4 h-4 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
+                      <span>{selectedProject.benchmarkTable.caption}</span>
+                    </div>
+                    <div className="overflow-x-auto rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22]">
+                      <table className="w-full min-w-[540px] text-left border-collapse text-xs font-mono">
+                        <thead>
+                          <tr className="border-b border-[#DED8C8] dark:border-[#272D37] bg-[#F3EFE6]/80 dark:bg-[#14181D] text-[10px] sm:text-[11px] uppercase text-[#52504C] dark:text-[#A7ACB4]">
+                            <th className="py-2.5 px-3">Model Architecture</th>
+                            <th className="py-2.5 px-3">Accuracy</th>
+                            <th className="py-2.5 px-3">Macro Precision</th>
+                            <th className="py-2.5 px-3">Macro Recall</th>
+                            <th className="py-2.5 px-3">Macro F1</th>
+                            <th className="py-2.5 px-3 text-right">Model Size</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-[#DED8C8] dark:divide-[#272D37]">
+                          {selectedProject.benchmarkTable.rows.map((row) => (
+                            <tr
+                              key={row.model}
+                              className={
+                                row.highlight
+                                  ? "bg-[#9E2A2B]/10 dark:bg-[#E06D53]/15 font-semibold text-[#161615] dark:text-[#ECE8E1]"
+                                  : "text-[#52504C] dark:text-[#A7ACB4]"
+                              }
+                            >
+                              <td className="py-2.5 px-3 flex items-center gap-1.5">
+                                <span>{row.model}</span>
+                                {row.highlight && (
+                                  <span className="px-1.5 py-0.5 rounded text-[9px] uppercase bg-[#9E2A2B] text-white dark:bg-[#E06D53] dark:text-[#0D0F12]">
+                                    Best
+                                  </span>
+                                )}
+                              </td>
+                              <td className="py-2.5 px-3 text-[#9E2A2B] dark:text-[#E06D53] font-bold">
+                                {row.accuracy}
+                              </td>
+                              <td className="py-2.5 px-3">{row.precision}</td>
+                              <td className="py-2.5 px-3">{row.recall}</td>
+                              <td className="py-2.5 px-3">{row.f1}</td>
+                              <td className="py-2.5 px-3 text-right">{row.size}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+
               {/* Methodology & Architecture */}
               <div className="space-y-2">
                 <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
@@ -380,6 +462,115 @@ export default function ProjectSection() {
                 </ul>
               </div>
 
+              {/* Extended Case Study Sections (Workflow, Preprocessing, Engineering Decisions, Limitations, Future Work) */}
+              {selectedProject.caseStudySections && (
+                <div className="space-y-5 pt-2 border-t border-[#DED8C8]/70 dark:border-[#272D37]">
+                  {/* End-to-End System Workflow */}
+                  {selectedProject.caseStudySections.workflow && (
+                    <div className="space-y-2">
+                      <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
+                        <Cpu className="w-4 h-4 text-[#1D3557] dark:text-[#6CA0DC] shrink-0" />
+                        <span>End-to-End System &amp; Inference Workflow</span>
+                      </div>
+                      <div className="grid grid-cols-1 gap-2">
+                        {selectedProject.caseStudySections.workflow.map((step, idx) => (
+                          <div
+                            key={idx}
+                            className="p-3 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
+                          >
+                            <span className="px-1.5 py-0.5 rounded bg-[#F3EFE6] dark:bg-[#14181D] font-mono text-[10px] font-bold text-[#1D3557] dark:text-[#6CA0DC] shrink-0">
+                              STEP {idx + 1}
+                            </span>
+                            <span className="leading-relaxed">{step}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Preprocessing Parity Notes */}
+                  {selectedProject.caseStudySections.preprocessingNotes && (
+                    <div className="space-y-2">
+                      <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold">
+                        Input Transformation &amp; Preprocessing Parity
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                        {selectedProject.caseStudySections.preprocessingNotes.map(
+                          (note, idx) => (
+                            <div
+                              key={idx}
+                              className="p-3 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] space-y-1 text-[11px] sm:text-xs font-mono"
+                            >
+                              <div className="font-bold text-[#9E2A2B] dark:text-[#E06D53]">
+                                {note.model}
+                              </div>
+                              <div className="text-[#52504C] dark:text-[#A7ACB4] leading-relaxed">
+                                {note.transform}
+                              </div>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Engineering Challenges & Design Decisions */}
+                  {selectedProject.caseStudySections.challengesAndDecisions && (
+                    <div className="space-y-2">
+                      <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
+                        <span>Engineering Challenges &amp; Design Decisions</span>
+                      </div>
+                      <ul className="space-y-2 pl-1">
+                        {selectedProject.caseStudySections.challengesAndDecisions.map(
+                          (decision, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
+                            >
+                              <span className="font-mono text-xs font-bold text-[#9E2A2B] dark:text-[#E06D53] mt-0.5 shrink-0">
+                                →
+                              </span>
+                              <span className="leading-relaxed">{decision}</span>
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Limitations & Future Work Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                    {selectedProject.caseStudySections.limitations && (
+                      <div className="p-3.5 rounded-lg border border-amber-600/30 bg-amber-500/5 space-y-2">
+                        <div className="font-mono text-[11px] uppercase tracking-wider text-amber-800 dark:text-amber-400 font-semibold flex items-center gap-1.5">
+                          <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                          <span>Limitations &amp; Responsible Use</span>
+                        </div>
+                        <p className="text-xs text-[#52504C] dark:text-[#A7ACB4] leading-relaxed">
+                          {selectedProject.caseStudySections.limitations}
+                        </p>
+                      </div>
+                    )}
+
+                    {selectedProject.caseStudySections.futureWork && (
+                      <div className="p-3.5 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] space-y-2">
+                        <div className="font-mono text-[11px] uppercase tracking-wider text-[#1D3557] dark:text-[#6CA0DC] font-semibold">
+                          Future Research &amp; Engineering Roadmap
+                        </div>
+                        <ul className="space-y-1.5 text-xs text-[#52504C] dark:text-[#A7ACB4]">
+                          {selectedProject.caseStudySections.futureWork.map((fw, i) => (
+                            <li key={i} className="leading-relaxed">
+                              • {fw}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               {/* Empirical Outcomes */}
               <div className="space-y-2">
                 <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
@@ -400,7 +591,7 @@ export default function ProjectSection() {
               </div>
 
               {/* Tech Stack & Links Footer */}
-              <div className="pt-4 border-t border-[#DED8C8] dark:border-[#272D37] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="pt-4 border-t border-[#DED8C8] dark:border-[#272D37] flex flex-col gap-4">
                 <div className="flex flex-wrap gap-1.5">
                   {selectedProject.techStack.map((t) => (
                     <span
@@ -413,17 +604,6 @@ export default function ProjectSection() {
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
-                  {selectedProject.links.github && (
-                    <a
-                      href={selectedProject.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded bg-[#161615] text-white dark:bg-[#ECE8E1] dark:text-[#0D0F12] text-xs font-mono font-semibold"
-                    >
-                      <Github className="w-3.5 h-3.5" />
-                      <span>GitHub</span>
-                    </a>
-                  )}
                   {selectedProject.links.liveDemo && (
                     <a
                       href={selectedProject.links.liveDemo}
@@ -433,6 +613,39 @@ export default function ProjectSection() {
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>Live Deployment</span>
+                    </a>
+                  )}
+                  {selectedProject.links.github && (
+                    <a
+                      href={selectedProject.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded bg-[#161615] text-white dark:bg-[#ECE8E1] dark:text-[#0D0F12] text-xs font-mono font-semibold"
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                      <span>GitHub Repository</span>
+                    </a>
+                  )}
+                  {selectedProject.links.huggingFace && (
+                    <a
+                      href={selectedProject.links.huggingFace}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] text-[#161615] dark:text-[#ECE8E1] hover:border-[#9E2A2B] text-xs font-mono font-semibold"
+                    >
+                      <Database className="w-3.5 h-3.5 text-[#9E2A2B] dark:text-[#E06D53]" />
+                      <span>Hugging Face Models</span>
+                    </a>
+                  )}
+                  {selectedProject.links.releaseTag && (
+                    <a
+                      href={selectedProject.links.releaseTag}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] text-[#161615] dark:text-[#ECE8E1] hover:border-[#9E2A2B] text-xs font-mono font-semibold"
+                    >
+                      <Tag className="w-3.5 h-3.5 text-[#1D3557] dark:text-[#6CA0DC]" />
+                      <span>Release v1.0.0</span>
                     </a>
                   )}
                 </div>

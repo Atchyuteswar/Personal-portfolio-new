@@ -2,8 +2,8 @@
 // ATCHYUTESWAR GOTTUMUKKALA — ACADEMIC, PATENT & COLLEGIATE PORTFOLIO DATA
 // ============================================================================
 // Central configuration file powering the entire portfolio.
-// Populated with your official Indian Patent Application No. 202641112485
-// (Form 2 Complete Specification) and all 7 resumes.
+// Populated with your official Indian Patent Application No. 202641112485,
+// the full WasteAI Deep Learning Research Case Study, and all 7 resumes.
 // ============================================================================
 
 export interface PatentItem {
@@ -24,30 +24,53 @@ export interface PatentItem {
   bibtex: string;
 }
 
+export interface BenchmarkRow {
+  model: string;
+  accuracy: string;
+  precision: string;
+  recall: string;
+  f1: string;
+  size: string;
+  highlight?: boolean;
+}
+
 export interface ProjectItem {
   id: string;
   title: string;
   subtitle: string;
   category:
+    | "Patented Healthcare & Edge AI"
     | "AI, ML & Data Science"
     | "Enterprise & Cloud (SAP / Web)"
-    | "Web3 & Blockchain"
-    | "Patented Healthcare & Edge AI";
+    | "Web3 & Blockchain";
   semester: string;
   courseOrLab: string;
   advisor?: string;
   featured: boolean;
-  status: "Completed" | "Ongoing (Final Year)" | "Patented (App. 202641112485)";
+  status: "Completed" | "Live Research Prototype (v1.0.0)" | "Patented (App. 202641112485)";
   summary: string;
   problemStatement: string;
   methodology: string[];
   outcomes: string[];
   metrics: { label: string; value: string }[];
   techStack: string[];
+  benchmarkTable?: {
+    caption: string;
+    rows: BenchmarkRow[];
+  };
+  caseStudySections?: {
+    workflow?: string[];
+    preprocessingNotes?: { model: string; transform: string }[];
+    challengesAndDecisions?: string[];
+    limitations?: string;
+    futureWork?: string[];
+  };
   links: {
     github?: string;
     reportPdf?: string;
     liveDemo?: string;
+    huggingFace?: string;
+    releaseTag?: string;
     slides?: string;
   };
 }
@@ -112,22 +135,22 @@ export const portfolioData = {
     academicTitle:
       "Final-Year B.Tech. CSE (Data Science) Undergraduate · Patent Inventor · SAP Certified ABAP Cloud & AI Engineer",
     degree: "Bachelor of Technology (B.Tech.) in Computer Science & Engineering (Data Science)",
-    specialization: "Data Science, Multimodal Edge AI, Enterprise SAP ABAP Cloud & Full-Stack Systems",
+    specialization: "Data Science, Deep Learning / Computer Vision, Edge AI & SAP ABAP Cloud",
     university: "Marri Laxman Reddy Institute of Technology and Management (MLRITM)",
     department: "Department of Computer Science & Engineering (Data Science)",
     location: "Dundigal, Hyderabad - 500043, Telangana, India",
     phone: "+91 7702850277",
     enrollmentYear: "2023",
     graduationMonthYear: "March 2027",
-    graduationProgressPercent: 88, // Final Year (Sem VII -> Sem VIII March 2027)
+    graduationProgressPercent: 88,
     currentSemesterLabel: "Semester VII · Roll No. 237Y1A67D3 (Graduating March 2027)",
     cgpa: "7.65 / 10.0",
     rankOrDistinction:
       "Patent Inventor (IPO App. 202641112485) · SAP Certified (ABAP Cloud) · Chapter Head (1,000+ Members)",
     shortBio:
-      "Final-year Computer Science & Engineering (Data Science) undergraduate at Marri Laxman Reddy Institute of Technology and Management (MLRITM), Hyderabad (Roll No. 237Y1A67D3, Class of March 2027). Co-inventor of a filed Indian Patent (Application No. 202641112485) on Portable Multimodal Edge-AI Healthcare Screening, SAP Certified ABAP Cloud Developer, and builder of production AI/ML and Web2/Web3 systems.",
+      "Final-year Computer Science & Engineering (Data Science) undergraduate at Marri Laxman Reddy Institute of Technology and Management (MLRITM), Hyderabad (Roll No. 237Y1A67D3, Class of March 2027). Co-inventor of a filed Indian Patent (Application No. 202641112485) on Portable Multimodal Edge-AI Healthcare Screening, creator of the WasteAI multi-CNN computer vision benchmark (91.29% test accuracy), and SAP Certified ABAP Cloud Developer.",
     researchStatement:
-      "Across my undergraduate tenure (2023–2027), my work has focused on translating applied Data Science, Edge AI, and core Computer Science principles into formal intellectual property and deployed engineering artifacts—from modality-adaptive osteoarthritis risk screening for low-connectivity rural clinics (Indian Patent 202641112485) to multimodal Gemini 2.5 Android apps and SAP S/4HANA Clean Core business objects.",
+      "Across my undergraduate tenure (2023–2027), my work has focused on translating applied Data Science, Deep Learning, and core Computer Science principles into formal intellectual property and reproducible engineering artifacts—spanning modality-adaptive osteoarthritis risk screening (Indian Patent 202641112485), multi-architecture CNN benchmarks hosted on Hugging Face Hub (WasteAI), multimodal Gemini 2.5 Android apps (Volt), and SAP S/4HANA Clean Core business objects.",
     email: "atchyuteswar.gottumukkala@gmail.com",
     collegeEmail: "237y1a67d3@mlritm.ac.in",
     altEmail: "yt.atchyut@gmail.com",
@@ -203,15 +226,15 @@ export const portfolioData = {
     },
     {
       code: "RV-02",
-      title: "Enterprise SAP ABAP Cloud & Clean Core",
+      title: "Deep Learning, Computer Vision & NLP",
       description:
-        "SAP S/4HANA extensibility, ABAP RESTful Application Programming Model (RAP), CDS Views, and ABAP Dictionary architecture.",
+        "Multi-CNN transfer-learning benchmarks (WasteAI on Hugging Face & Streamlit), custom NLP dataset curation (Aira), and Gemini 2.5 Flash + ML Kit mobile inference (Volt).",
     },
     {
       code: "RV-03",
-      title: "Applied NLP, Vision & Full-Stack Systems",
+      title: "Enterprise SAP ABAP Cloud & Full-Stack",
       description:
-        "Custom dataset curation, Colab/FastAPI model serving, Gemini 2.5 Flash + ML Kit mobile systems, and Web2/Web3 platforms.",
+        "SAP S/4HANA Clean Core extensibility, ABAP RAP & CDS Views alongside scalable Next.js, Kotlin Jetpack Compose, and Web3 architectures.",
     },
   ],
 
@@ -327,6 +350,122 @@ export const portfolioData = {
     },
     {
       id: "PRJ-02",
+      title: "WasteAI — Deep Learning-Based Waste Classification & Multi-CNN Benchmark",
+      subtitle: "End-to-End Computer Vision Research Prototype · 4 CNN Architectures · Hugging Face Hub & Streamlit",
+      category: "AI, ML & Data Science",
+      semester: "Academic Research Prototype (v1.0.0)",
+      courseOrLab: "Computer Vision & Deep Learning Experimentation (B.Tech CSE — Data Science)",
+      featured: true,
+      status: "Live Research Prototype (v1.0.0)",
+      summary:
+        "Built and deployed an end-to-end six-class waste image classification research prototype comparing four CNN architectures (VGG19, VGG16, MobileNetV2, and a 4-block Custom CNN) across 2,526 images, achieving 91.29% held-out test accuracy and serving on-demand Keras weights from Hugging Face Hub via Streamlit.",
+      problemStatement:
+        "Effective waste sorting relies on accurate material identification prior to disposal. WasteAI was engineered to go beyond an isolated notebook experiment by connecting reproducible dataset splits, multi-architecture CNN benchmarking, training-to-inference preprocessing parity, decoupled Hugging Face model hosting, and public interactive deployment in one cohesive research artifact.",
+      methodology: [
+        "Prepared a reproducible Stage 2 experiment manifest on the 6-class Garbage Classification dataset (`cardboard`, `glass`, `metal`, `paper`, `plastic`, `trash` — 2,526 total images split 70% train [1,768] / 15% val [379] / 15% test [379] with seed 42, balanced class weights, and flip/rotation/zoom/contrast augmentation).",
+        "Trained and evaluated four distinct architectures on the identical 379-image held-out split: a 4-block Custom CNN from scratch (32/64/128/256 filters, BatchNorm, MaxPool, Dropout, GAP) and transfer-learning pipelines for MobileNetV2, VGG16, and VGG19.",
+        "Guaranteed strict training-to-inference preprocessing parity: EXIF orientation normalization, RGB conversion, TensorFlow bilinear resizing to 224 × 224 (`antialias=False`), and architecture-specific input scaling (`[0, 1]` for Custom CNN vs `* 255` + Keras `preprocess_input` for MobileNetV2/VGG16/VGG19).",
+        "Decoupled 289+ MB of `.keras` model weights from Git into a dedicated Hugging Face Hub repository (`Atchyuteswar/wasteai-models`) with on-demand downloading and a 1-model-at-a-time memory cache inside a 5-module Streamlit application.",
+      ],
+      outcomes: [
+        "Achieved 91.29% held-out test accuracy (89.93% Macro F1) with VGG19, while demonstrating an 87.07% accuracy / 22.60 MB lightweight deployment trade-off with MobileNetV2 (6.6x smaller than VGG19).",
+        "Published full v1.0.0 release with live Streamlit deployment, public Hugging Face model repository, and portable project-relative split manifests.",
+      ],
+      metrics: [
+        { label: "Best Test Accuracy", value: "91.29% (VGG19)" },
+        { label: "Dataset Split", value: "2,526 Images" },
+        { label: "Architectures", value: "4 CNN Models" },
+      ],
+      benchmarkTable: {
+        caption:
+          "Held-out evaluation across all 4 trained architectures on the identical 379-image test split (Seed 42):",
+        rows: [
+          {
+            model: "VGG19 (Best Accuracy)",
+            accuracy: "91.29%",
+            precision: "90.43%",
+            recall: "89.76%",
+            f1: "89.93%",
+            size: "150.03 MB",
+            highlight: true,
+          },
+          {
+            model: "VGG16",
+            accuracy: "88.65%",
+            precision: "87.58%",
+            recall: "88.14%",
+            f1: "87.69%",
+            size: "111.76 MB",
+          },
+          {
+            model: "MobileNetV2 (Best Size/Acc Trade-off)",
+            accuracy: "87.07%",
+            precision: "87.29%",
+            recall: "85.67%",
+            f1: "86.01%",
+            size: "22.60 MB",
+          },
+          {
+            model: "Custom CNN (4-Block Baseline)",
+            accuracy: "73.09%",
+            precision: "70.27%",
+            recall: "72.12%",
+            f1: "69.62%",
+            size: "4.92 MB",
+          },
+        ],
+      },
+      caseStudySections: {
+        workflow: [
+          "1. Image Input: User uploads an RGB waste image via the Streamlit interface.",
+          "2. Image Preparation: EXIF orientation is normalized, converted to 3-channel RGB, and resized to 224 × 224 using TensorFlow bilinear interpolation (`antialias=False`).",
+          "3. Model-Specific Preprocessing: Applies exact training normalization (`[0, 1]` for Custom CNN; `* 255` then architecture-specific `preprocess_input` for MobileNetV2, VGG16, and VGG19).",
+          "4. On-Demand Inference: Selected `.keras` model is pulled from Hugging Face Hub (cached 1 model at a time to bound RAM) to produce 6 class scores.",
+          "5. Presentation & Analytics: Displays predicted category, 6-class probability distribution, disposal guidance, and comparative training/test analytics.",
+        ],
+        preprocessingNotes: [
+          { model: "Custom CNN", transform: "Common RGB tensor normalized to [0, 1]" },
+          { model: "MobileNetV2", transform: "Multiply by 255, then MobileNetV2 preprocess_input" },
+          { model: "VGG16", transform: "Multiply by 255, then VGG16 preprocess_input" },
+          { model: "VGG19", transform: "Multiply by 255, then VGG19 preprocess_input" },
+        ],
+        challengesAndDecisions: [
+          "Fair Multi-Model Comparison: Enforced the exact same Stage 2 train/val/test split (1,768 / 379 / 379, seed 42) across all four architectures.",
+          "Training-Inference Parity: Replaced Pillow resizing with TensorFlow bilinear interpolation (`antialias=False`) to match notebook `tf.image.resize` behavior.",
+          "Decoupled Weight Hosting: Stored `.keras` models (up to 150 MB) on Hugging Face Hub rather than bloating Git history.",
+          "Cloud Memory Management: Implemented single-model active caching so switching between VGG19 and VGG16 does not exhaust Streamlit Cloud RAM.",
+          "Portable Experiment Metadata: Converted Colab-specific absolute paths into portable project-relative dataset manifests.",
+        ],
+        limitations:
+          "WasteAI is an academic computer-vision research prototype, not a certified industrial sorting system. Predictions reflect visual dataset categories rather than chemical resin composition, contamination state, or municipal recyclability rules, and softmax outputs are uncalibrated.",
+        futureWork: [
+          "Evaluate generalization on larger external out-of-distribution waste datasets captured under varied lighting and backgrounds.",
+          "Add per-class precision/recall confusion analysis and temperature-scaled probability calibration.",
+          "Explore INT8 quantization and model compression on MobileNetV2 for edge/mobile deployment.",
+          "Profile cold-start Hugging Face download time, warm inference latency, and peak RAM footprint.",
+        ],
+      },
+      techStack: [
+        "Python 3.11",
+        "TensorFlow 2.21",
+        "Keras 3.13",
+        "Streamlit",
+        "Hugging Face Hub",
+        "VGG19 / VGG16",
+        "MobileNetV2",
+        "Custom CNN",
+        "Altair",
+        "scikit-learn",
+      ],
+      links: {
+        liveDemo: "https://wasteai-atchyuteswar.streamlit.app/",
+        github: "https://github.com/Atchyuteswar/WasteAI",
+        huggingFace: "https://huggingface.co/Atchyuteswar/wasteai-models",
+        releaseTag: "https://github.com/Atchyuteswar/WasteAI/releases/tag/v1.0.0",
+      },
+    },
+    {
+      id: "PRJ-03",
       title: "Volt — AI-Powered Multimodal Nutrition & Hydration Tracker",
       subtitle: "Native Android (Kotlin + Jetpack Compose) · Gemini 2.5 Flash · ML Kit · Supabase",
       category: "AI, ML & Data Science",
@@ -368,7 +507,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-03",
+      id: "PRJ-04",
       title: "Aira — Custom NLP Emotional Support Companion & FastAPI Engine",
       subtitle: "Dataset Curation · Model Fine-Tuning (Google Colab) · FastAPI · React Native (Expo)",
       category: "AI, ML & Data Science",
@@ -409,7 +548,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-04",
+      id: "PRJ-05",
       title: "SAP S/4HANA Clean Core & ABAP RAP Business Object Suite",
       subtitle: "ABAP RESTful Application Programming Model · CDS Views · ADT/Eclipse · BOR",
       category: "Enterprise & Cloud (SAP / Web)",
@@ -450,7 +589,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-05",
+      id: "PRJ-06",
       title: "Cryptolit — Full-Stack Web3 Wallet & Decentralized Bounty Platform",
       subtitle: "Next.js · BSV Blockchain · Smart Contracts · Neon DB · Prisma ORM",
       category: "Web3 & Blockchain",
@@ -491,7 +630,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-06",
+      id: "PRJ-07",
       title: "BBH-MLRITM — Campus Blockchain Chapter Portal & Event Hub",
       subtitle: "Official College Club Platform for Big Blockers Hyderabad @ MLRITM",
       category: "Web3 & Blockchain",
@@ -522,7 +661,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-07",
+      id: "PRJ-08",
       title: "Climate Action Front (CAF) — Climate Governance & Data Repository",
       subtitle: "Policy & Investor Decision-Support Platform + Climate Data Analysis",
       category: "Enterprise & Cloud (SAP / Web)",
@@ -553,7 +692,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-08",
+      id: "PRJ-09",
       title: "Simple Todo REST API & Earth Leaders Sustainability Portal",
       subtitle: "Swagger OpenAPI Backend + Interactive Environmental Education Web App",
       category: "Enterprise & Cloud (SAP / Web)",
@@ -680,6 +819,7 @@ export const portfolioData = {
     advisor: "Prof. Kavati Sridhar (ECE), Prof. Banoth Prasad (CSE) & Dr. S. P. Jani (MLRITM)",
     honors: [
       "Filed Utility Patent Co-Inventor — Indian Patent Application No. 202641112485 (Form 2 Complete Specification, MLRITM & MLRIT)",
+      "Author of WasteAI Multi-CNN Computer Vision Benchmark (91.29% Held-Out Test Accuracy · Hosted on Hugging Face Hub & Streamlit)",
       "SAP Certified Back-End Developer — ABAP Cloud (Credential ID: 09dc84ad-438c-4d0e-a216-29110195af66)",
       "Head of Hyderabad Chapter — Big Blockers Community (Grew chapter to 1,000+ members & trained 700+ students)",
       "Earned 30+ Verified Industry Certifications & Cloud/AI Skill Badges (Google Cloud, AWS, NVIDIA, Cisco, Microsoft)",
@@ -716,11 +856,11 @@ export const portfolioData = {
         period: "2025 – 2026",
         status: "Completed",
         sgpa: "Completed",
-        highlight: "Computer Networks, Compiler Design, Aira NLP Companion & Multimodal Edge-AI Research",
+        highlight: "Computer Networks, Compiler Design, WasteAI CNN Benchmark & Aira NLP Companion",
         courses: [
           { code: "CS301", name: "Computer Networks & Protocol Engineering", tag: "Core CS" },
           { code: "CS302", name: "Compiler Design & Formal Languages", tag: "Core CS" },
-          { code: "DS305", name: "Machine Learning, NLP & Dataset Curation", tag: "Data Science" },
+          { code: "DS305", name: "Deep Learning, CNNs & Natural Language Processing", tag: "Data Science" },
           { code: "IP390", name: "Multimodal Sensor Fusion & Edge-AI Prototyping", tag: "Capstone" },
         ],
       },
