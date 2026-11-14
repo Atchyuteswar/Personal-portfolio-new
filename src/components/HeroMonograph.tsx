@@ -168,14 +168,14 @@ export default function HeroMonograph() {
                   className="p-3 sm:p-3.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] hover:border-[#9E2A2B] transition-colors group"
                 >
                   <div className="flex items-center justify-between text-[#78756F] dark:text-[#A7ACB4] mb-1">
-                    <span className="font-mono text-[10px] uppercase">Patents</span>
+                    <span className="font-mono text-[10px] uppercase">Patent Filed</span>
                     <ScrollText className="w-3.5 h-3.5 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
                   </div>
                   <div className="font-serif text-xl sm:text-2xl font-bold text-[#161615] dark:text-[#ECE8E1] group-hover:text-[#9E2A2B] dark:group-hover:text-[#E06D53]">
-                    0{patents.length}+
+                    01
                   </div>
                   <div className="font-mono text-[10px] text-[#52504C] dark:text-[#A7ACB4] mt-0.5 truncate">
-                    Utility Filings
+                    App: 202641112485
                   </div>
                 </a>
 

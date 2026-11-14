@@ -2,8 +2,8 @@
 // ATCHYUTESWAR GOTTUMUKKALA — ACADEMIC, PATENT & COLLEGIATE PORTFOLIO DATA
 // ============================================================================
 // Central configuration file powering the entire portfolio.
-// Real data has been populated from your resumes; patent titles/numbers and
-// additional college project slots are marked clearly for quick editing!
+// Populated with your official Indian Patent Application No. 202641112485
+// (Form 2 Complete Specification) and all 7 resumes.
 // ============================================================================
 
 export interface PatentItem {
@@ -12,11 +12,13 @@ export interface PatentItem {
   applicationNumber: string;
   filingDate: string;
   jurisdiction: string;
+  applicants?: string[];
   status: "Patent Filed" | "Published" | "Under Examination" | "Granted";
   domain: string;
   inventors: string[];
   abstract: string;
   keyClaims: string[];
+  systemModules?: { code: string; name: string; role: string }[];
   relatedProjectId?: string;
   citationText: string;
   bibtex: string;
@@ -30,12 +32,12 @@ export interface ProjectItem {
     | "AI, ML & Data Science"
     | "Enterprise & Cloud (SAP / Web)"
     | "Web3 & Blockchain"
-    | "College & Capstone Placeholders";
+    | "Patented Healthcare & Edge AI";
   semester: string;
   courseOrLab: string;
   advisor?: string;
   featured: boolean;
-  status: "Completed" | "Ongoing (Final Year)" | "Patent / Research Slot";
+  status: "Completed" | "Ongoing (Final Year)" | "Patented (App. 202641112485)";
   summary: string;
   problemStatement: string;
   methodology: string[];
@@ -101,30 +103,33 @@ export interface CampusActivity {
 
 export const portfolioData = {
   // --------------------------------------------------------------------------
-  // 1. IDENTITY & ACADEMIC METADATA (POPULATED FROM RESUMES)
+  // 1. IDENTITY & ACADEMIC METADATA
   // --------------------------------------------------------------------------
   profile: {
     monogram: "AG",
     fullName: "Atchyuteswar Gottumukkala",
+    rollNumber: "237Y1A67D3",
     academicTitle:
-      "Final-Year B.Tech. CSE (Data Science) Undergraduate · SAP Certified ABAP Cloud & AI/Full-Stack Engineer",
+      "Final-Year B.Tech. CSE (Data Science) Undergraduate · Patent Inventor · SAP Certified ABAP Cloud & AI Engineer",
     degree: "Bachelor of Technology (B.Tech.) in Computer Science & Engineering (Data Science)",
-    specialization: "Data Science, Applied AI/ML, Enterprise SAP ABAP Cloud & Full-Stack Systems",
+    specialization: "Data Science, Multimodal Edge AI, Enterprise SAP ABAP Cloud & Full-Stack Systems",
     university: "Marri Laxman Reddy Institute of Technology and Management (MLRITM)",
     department: "Department of Computer Science & Engineering (Data Science)",
-    location: "Hyderabad, Telangana, India",
+    location: "Dundigal, Hyderabad - 500043, Telangana, India",
     phone: "+91 7702850277",
     enrollmentYear: "2023",
     graduationMonthYear: "March 2027",
     graduationProgressPercent: 88, // Final Year (Sem VII -> Sem VIII March 2027)
-    currentSemesterLabel: "Semester VII · Final Year (Graduating March 2027)",
+    currentSemesterLabel: "Semester VII · Roll No. 237Y1A67D3 (Graduating March 2027)",
     cgpa: "7.65 / 10.0",
-    rankOrDistinction: "SAP Certified (ABAP Cloud) · Patent Co-Inventor · Chapter Head (1,000+ Members)",
+    rankOrDistinction:
+      "Patent Inventor (IPO App. 202641112485) · SAP Certified (ABAP Cloud) · Chapter Head (1,000+ Members)",
     shortBio:
-      "Final-year Computer Science & Engineering (Data Science) undergraduate at MLRITM, Hyderabad (Class of March 2027). My collegiate work spans filed utility patents, multimodal AI mobile systems (Gemini 2.5 + ML Kit, custom NLP pipelines), SAP S/4HANA Clean Core & ABAP RAP enterprise engineering, and full-stack Web2/Web3 platforms.",
+      "Final-year Computer Science & Engineering (Data Science) undergraduate at Marri Laxman Reddy Institute of Technology and Management (MLRITM), Hyderabad (Roll No. 237Y1A67D3, Class of March 2027). Co-inventor of a filed Indian Patent (Application No. 202641112485) on Portable Multimodal Edge-AI Healthcare Screening, SAP Certified ABAP Cloud Developer, and builder of production AI/ML and Web2/Web3 systems.",
     researchStatement:
-      "Across my undergraduate tenure (2023–2027), I have focused on bridging academic Data Science and core Computer Science fundamentals (DSA, OOP, DBMS, Compiler Design, Computer Networks) with real-world intellectual property and production systems—leading a 1,000+ member campus developer chapter, contributing to open-source, and filing collegiate patents.",
+      "Across my undergraduate tenure (2023–2027), my work has focused on translating applied Data Science, Edge AI, and core Computer Science principles into formal intellectual property and deployed engineering artifacts—from modality-adaptive osteoarthritis risk screening for low-connectivity rural clinics (Indian Patent 202641112485) to multimodal Gemini 2.5 Android apps and SAP S/4HANA Clean Core business objects.",
     email: "atchyuteswar.gottumukkala@gmail.com",
+    collegeEmail: "237y1a67d3@mlritm.ac.in",
     altEmail: "yt.atchyut@gmail.com",
     links: {
       cvPdf: "#certifications",
@@ -141,7 +146,7 @@ export const portfolioData = {
       description:
         "This site serves as my dedicated Academic, Patent & Collegiate Monograph for MLRITM (2023–2027). To view my commercial client engagements, freelance web platforms, and studio services, visit my primary portfolio at atchyut.vercel.app.",
       stats: [
-        { label: "Production Projects", value: "8+ Shipped" },
+        { label: "Patent Application", value: "202641112485" },
         { label: "Cloud & AI Badges", value: "30+ Earned" },
       ],
     },
@@ -149,9 +154,7 @@ export const portfolioData = {
       enabled: true,
       autoplayOnVisit: true,
       randomizeOnVisit: true,
-      defaultVolume: 0.35, // 35% gentle background study volume
-      // Optional: Place an MP3 file at `public/music.mp3` and set customMp3Url: "/music.mp3"
-      // Leave empty ("") to use the 5 built-in Generative Academic Soundscapes!
+      defaultVolume: 0.35,
       customMp3Url: "",
       tracks: [
         {
@@ -194,9 +197,9 @@ export const portfolioData = {
   researchAreas: [
     {
       code: "RV-01",
-      title: "Applied AI, NLP & Multimodal Vision",
+      title: "Multimodal Edge AI & Digital Healthcare",
       description:
-        "Dataset curation, lightweight NLP fine-tuning in Colab/FastAPI, and on-device/cloud multimodal inference with Gemini 2.5 Flash & ML Kit.",
+        "Modality-adaptive sensor fusion, wearable IMU/gait analysis, and offline-capable edge AI screening for rural and low-connectivity clinics (Indian Patent 202641112485).",
     },
     {
       code: "RV-02",
@@ -206,84 +209,124 @@ export const portfolioData = {
     },
     {
       code: "RV-03",
-      title: "Full-Stack Systems, Data Science & Web3",
+      title: "Applied NLP, Vision & Full-Stack Systems",
       description:
-        "Scalable Next.js, Kotlin Jetpack Compose, and Supabase/PostgreSQL architectures alongside BSV smart contracts and climate data repositories.",
+        "Custom dataset curation, Colab/FastAPI model serving, Gemini 2.5 Flash + ML Kit mobile systems, and Web2/Web3 platforms.",
     },
   ],
 
   // --------------------------------------------------------------------------
   // 3. FILED PATENTS & INTELLECTUAL PROPERTY (§ 01)
-  // (Ready for your exact patent titles & application numbers!)
   // --------------------------------------------------------------------------
   patents: [
     {
       id: "PAT-01",
       title:
-        "[Patent #1 Placeholder — Replace with Your Filed Patent Title]",
-      applicationNumber: "2026410XXXXX (Update with Indian Patent Application No.)",
-      filingDate: "2025 / 2026",
-      jurisdiction: "Indian Patent Office (IPO) · Chennai / Hyderabad",
+        "Portable Multimodal AI-Assisted Osteoarthritis Risk Screening and Early Detection System",
+      applicationNumber: "202641112485",
+      filingDate: "2026 (Form 2 Complete Specification under The Patent Act, 1970)",
+      jurisdiction: "Indian Patent Office (IPO) · Chennai",
+      applicants: [
+        "Marri Laxman Reddy Institute of Technology and Management (MLRITM), Dundigal, Hyderabad-500043",
+        "MLR Institute of Technology (MLRIT), Dundigal, Hyderabad-500043",
+      ],
       status: "Patent Filed",
-      domain: "Computer Science & Engineering (Data Science / AI Systems)",
+      domain: "Edge AI, Multimodal Biomedical Sensing & Rural Digital Healthcare",
       inventors: [
+        "R. Tejasree",
+        "Beemarthi Soumya Laxmi",
         "Atchyuteswar Gottumukkala",
-        "[Faculty Mentor / Co-Inventor Name — MLRITM]",
+        "Ch. Sathwika",
+        "G. Karthik",
+        "G. Srinivas",
+        "Prof. Kavati Sridhar (Asst. Prof, ECE)",
+        "Prof. Banoth Prasad (Assoc. Prof, CSE)",
+        "Dr. S. P. Jani (Prof, Mech. Engg.)",
       ],
       abstract:
-        "Placeholder for your first filed utility patent at Marri Laxman Reddy Institute of Technology and Management (MLRITM). Share the exact patent title, application number, filing date, co-inventors, and a 2–3 line summary of the invention, and this registry card will display your official filing details.",
+        "Discloses a Portable Multimodal AI-Assisted Osteoarthritis Risk Screening and Early Detection System (100) for preliminary screening of osteoarthritis (OA)-associated risk markers in resource-constrained, rural, and low-connectivity healthcare environments. The system integrates a Patient Assessment Module (110), Joint Movement Sensing Module (120), Gait and Posture Assessment Module (130), Optional Imaging/Sensor Acquisition Module (140), Edge AI Preprocessing Module (150), AI-Based OA Risk Analysis Module (160), Modality-Adaptive Risk Fusion and Severity Assessment Module (170), Healthcare Worker Interface Module (180), Offline Data and Synchronization Module (190), and Preventive Guidance and Reporting Module (200). Available and quality-qualified modality outputs are selectively combined on an edge computing platform to generate a preliminary OA risk profile without requiring simultaneous availability of all acquisition modalities, while supporting local offline storage and deferred synchronization with a Remote Healthcare System (102).",
+      systemModules: [
+        { code: "110", name: "Patient Assessment Module", role: "Pain, stiffness, mobility & guided functional assessment" },
+        { code: "120", name: "Joint Movement Sensing Module", role: "IMU, accelerometer, gyroscope & wearable range/symmetry signals" },
+        { code: "130", name: "Gait & Posture Assessment Module", role: "Camera/sensor walking pattern, balance & posture deviation" },
+        { code: "140", name: "Optional Imaging/Sensor Module", role: "Thermal, pressure, force or imaging capture when available" },
+        { code: "150", name: "Edge AI Preprocessing Module", role: "Noise reduction, segmentation, feature extraction & quality gating" },
+        { code: "160", name: "AI-Based OA Risk Analysis Module", role: "Edge ML inference generating modality-specific OA risk indicators" },
+        { code: "170", name: "Modality-Adaptive Risk Fusion (Core)", role: "Excludes unavailable/low-quality inputs & fuses qualified modalities" },
+        { code: "180", name: "Healthcare Worker Interface", role: "Multilingual guided field workflow & digital screening record" },
+        { code: "190", name: "Offline Data & Sync Module", role: "Local storage during network outage & deferred sync to System (102)" },
+        { code: "200", name: "Preventive Guidance & Reporting", role: "Digital risk report & non-diagnostic joint-care guidance" },
+      ],
       keyClaims: [
-        "Claim 1 Placeholder: Describe the core novel architecture, algorithm, or hardware-software workflow disclosed in your filing.",
-        "Claim 2 Placeholder: Describe the data processing pipeline, model optimization, or system integration claim.",
-        "Claim 3 Placeholder: Describe the empirical advantage or application scenario covered by the patent.",
+        "Claim 1 (Independent System Claim): A 10-module portable multimodal AI-assisted osteoarthritis risk screening system (100) configured to generate a preliminary OA risk profile using available and quality-qualified modality outputs without requiring simultaneous availability of all acquisition modalities.",
+        "Claim 2 (Joint Movement Sensing — 120): Comprises inertial measurement units (IMUs), accelerometers, gyroscopes, magnetometers, or wearable/mobile motion sensors capturing movement range, pattern, symmetry, and stability during guided joint activities.",
+        "Claim 3 (Gait & Posture Assessment — 130): Acquires walking pattern, step characteristics, balance, posture deviation, and movement asymmetry using wearable sensors, cameras, smartphones, or portable computing devices.",
+        "Claim 4 (Edge AI Preprocessing & Quality Gating — 150): Performs noise reduction, signal conditioning, normalization, temporal segmentation, feature extraction, data-quality assessment, and modality availability determination prior to AI risk analysis.",
+        "Claim 5 (Modality-Adaptive Risk Fusion — 170): Identifies available modalities, evaluates quality status (Stage 240), excludes unavailable or unsuitable modality outputs (Stage 241) without terminating screening, and selectively fuses qualified outputs.",
+        "Claim 6 (Multilingual Field Interface — 180): Provides a guided multilingual workflow for healthcare workers comprising patient registration, language selection, assessment instructions, acquisition-status indication, and digital report generation.",
+        "Claim 7 (Offline Storage & Controlled Sync — 190): Maintains locally stored patient assessments, extracted features, and screening results during network unavailability (Stage 300) and synchronizes with a Remote Healthcare System (102) upon connectivity restoration (Stage 320).",
+        "Claim 8 (Preventive Guidance & Reporting — 200): Generates a digital screening report comprising the preliminary OA risk classification (Low / Moderate / High), observed risk indicators, and non-diagnostic preventive joint-care and lifestyle guidance.",
       ],
-      relatedProjectId: "PRJ-CAP-01",
+      relatedProjectId: "PRJ-01",
       citationText:
-        "Gottumukkala, Atchyuteswar, et al. \"[Your Patent Title Here].\" Indian Patent Application 2026410XXXXX, filed at Marri Laxman Reddy Institute of Technology and Management (MLRITM).",
-      bibtex: `@misc{gottumukkala2026patent1,
-  title={[Your Patent Title #1 Here]},
-  author={Gottumukkala, Atchyuteswar and [Co-Inventors]},
+        "Tejasree, R., Beemarthi Soumya Laxmi, Atchyuteswar Gottumukkala, Ch. Sathwika, G. Karthik, G. Srinivas, Kavati Sridhar, Banoth Prasad, and S. P. Jani. \"Portable Multimodal AI-Assisted Osteoarthritis Risk Screening and Early Detection System.\" Indian Patent Application No. 202641112485, filed 2026 by Marri Laxman Reddy Institute of Technology and Management & MLR Institute of Technology, Hyderabad.",
+      bibtex: `@misc{gottumukkala2026oapatent,
+  title={Portable Multimodal AI-Assisted Osteoarthritis Risk Screening and Early Detection System},
+  author={Tejasree, R. and Laxmi, Beemarthi Soumya and Gottumukkala, Atchyuteswar and Sathwika, Ch. and Karthik, G. and Srinivas, G. and Sridhar, Kavati and Prasad, Banoth and Jani, S. P.},
   year={2026},
-  note={Indian Patent Application No. 2026410XXXXX, MLRITM Hyderabad (Filed)}
-}`,
-    },
-    {
-      id: "PAT-02",
-      title:
-        "[Patent #2 Placeholder — Replace with Your Second Filed Patent Title]",
-      applicationNumber: "2026410YYYYY (Update with Indian Patent Application No.)",
-      filingDate: "2025 / 2026",
-      jurisdiction: "Indian Patent Office (IPO) · Chennai / Hyderabad",
-      status: "Patent Filed",
-      domain: "Intelligent Systems & Data Engineering",
-      inventors: [
-        "Atchyuteswar Gottumukkala",
-        "[Faculty Mentor / Co-Inventor Name — MLRITM]",
-      ],
-      abstract:
-        "Placeholder for your second filed patent disclosure. You can add as many patents as you have filed during your B.Tech at MLRITM—each entry supports official application numbers, status stamps (Filed / Published / Granted), inventor lists, technical claims, and one-click BibTeX citations.",
-      keyClaims: [
-        "Claim 1 Placeholder: Primary system or method claim from your patent specification.",
-        "Claim 2 Placeholder: Secondary apparatus or algorithmic workflow claim.",
-      ],
-      relatedProjectId: "PRJ-CAP-02",
-      citationText:
-        "Gottumukkala, Atchyuteswar, et al. \"[Your Second Patent Title Here].\" Indian Patent Application 2026410YYYYY, filed at MLRITM Hyderabad.",
-      bibtex: `@misc{gottumukkala2026patent2,
-  title={[Your Patent Title #2 Here]},
-  author={Gottumukkala, Atchyuteswar and [Co-Inventors]},
-  year={2026},
-  note={Indian Patent Application No. 2026410YYYYY, MLRITM Hyderabad (Filed)}
+  howpublished={Indian Patent Application No. 202641112485 (Form 2 Complete Specification)},
+  note={Applicants: Marri Laxman Reddy Institute of Technology and Management (MLRITM) and MLR Institute of Technology, Dundigal, Hyderabad-500043 (Patent Filed)}
 }`,
     },
   ] as PatentItem[],
 
   // --------------------------------------------------------------------------
-  // 4. REAL PROJECTS + COLLEGE PROJECT PLACEHOLDERS (§ 02)
+  // 4. COLLEGIATE, PATENTED & PRODUCTION PROJECTS (§ 02)
   // --------------------------------------------------------------------------
   projects: [
     {
       id: "PRJ-01",
+      title: "Portable Multimodal AI-Assisted Osteoarthritis Risk Screening System (100)",
+      subtitle: "Patented Edge-AI Healthcare Platform · Modality-Adaptive Sensor Fusion · Offline Field Sync",
+      category: "Patented Healthcare & Edge AI",
+      semester: "2026 (Patent App. 202641112485)",
+      courseOrLab: "MLRITM Interdisciplinary Research & IPR Cell",
+      advisor: "Prof. Kavati Sridhar, Prof. Banoth Prasad & Dr. S. P. Jani",
+      featured: true,
+      status: "Patented (App. 202641112485)",
+      summary:
+        "Architected a 10-module portable edge-AI screening platform (System 100) for early detection of osteoarthritis (OA) risk markers across primary health centers, rural health camps, and mobile medical units with intermittent connectivity.",
+      problemStatement:
+        "Conventional osteoarthritis assessment relies on specialist consultation and fixed diagnostic imaging that are unavailable in rural and underserved healthcare locations, while rigid multi-sensor systems fail when individual sensors or network links are missing.",
+      methodology: [
+        "Designed a 4-channel multimodal acquisition layer: Patient Assessment Module (110), IMU/Wearable Joint Movement Sensing Module (120), Camera/Sensor Gait & Posture Assessment Module (130), and Optional Thermal/Pressure/Imaging Module (140).",
+        "Formulated an Edge AI Preprocessing & Quality Gating pipeline (Module 150, Stages 230–241) and Modality-Adaptive Risk Fusion Engine (Module 170, Stage 260) that dynamically excludes unavailable or noisy modalities while fusing remaining qualified features.",
+        "Integrated a multilingual Healthcare Worker Interface (Module 180), Preventive Guidance & Reporting Engine (Module 200), and Offline Data & Synchronization Module (190) for local storage (Stage 300) and deferred cloud sync (Stage 320) to Remote Healthcare System (102).",
+      ],
+      outcomes: [
+        "Filed Form 2 Complete Specification under The Indian Patent Act, 1970 — Patent Application No. 202641112485.",
+        "Established complete Examiner-Ready Section 3(k) technical hardware-software integration across 8 formal patent claims and 2 architectural workflow figures.",
+      ],
+      metrics: [
+        { label: "Patent App No.", value: "202641112485" },
+        { label: "System Architecture", value: "10 Modules" },
+        { label: "Formal Claims", value: "8 Claims" },
+      ],
+      techStack: [
+        "Edge AI",
+        "Multimodal Sensor Fusion",
+        "IMU & Wearable Sensing",
+        "Computer Vision (Gait/Posture)",
+        "Signal Conditioning",
+        "Offline-First Sync",
+        "Digital Healthcare",
+      ],
+      links: {
+        reportPdf: "#patents",
+      },
+    },
+    {
+      id: "PRJ-02",
       title: "Volt — AI-Powered Multimodal Nutrition & Hydration Tracker",
       subtitle: "Native Android (Kotlin + Jetpack Compose) · Gemini 2.5 Flash · ML Kit · Supabase",
       category: "AI, ML & Data Science",
@@ -325,7 +368,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-02",
+      id: "PRJ-03",
       title: "Aira — Custom NLP Emotional Support Companion & FastAPI Engine",
       subtitle: "Dataset Curation · Model Fine-Tuning (Google Colab) · FastAPI · React Native (Expo)",
       category: "AI, ML & Data Science",
@@ -366,7 +409,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-03",
+      id: "PRJ-04",
       title: "SAP S/4HANA Clean Core & ABAP RAP Business Object Suite",
       subtitle: "ABAP RESTful Application Programming Model · CDS Views · ADT/Eclipse · BOR",
       category: "Enterprise & Cloud (SAP / Web)",
@@ -407,7 +450,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-04",
+      id: "PRJ-05",
       title: "Cryptolit — Full-Stack Web3 Wallet & Decentralized Bounty Platform",
       subtitle: "Next.js · BSV Blockchain · Smart Contracts · Neon DB · Prisma ORM",
       category: "Web3 & Blockchain",
@@ -448,7 +491,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-05",
+      id: "PRJ-06",
       title: "BBH-MLRITM — Campus Blockchain Chapter Portal & Event Hub",
       subtitle: "Official College Club Platform for Big Blockers Hyderabad @ MLRITM",
       category: "Web3 & Blockchain",
@@ -479,7 +522,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-06",
+      id: "PRJ-07",
       title: "Climate Action Front (CAF) — Climate Governance & Data Repository",
       subtitle: "Policy & Investor Decision-Support Platform + Climate Data Analysis",
       category: "Enterprise & Cloud (SAP / Web)",
@@ -510,7 +553,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-07",
+      id: "PRJ-08",
       title: "Simple Todo REST API & Earth Leaders Sustainability Portal",
       subtitle: "Swagger OpenAPI Backend + Interactive Environmental Education Web App",
       category: "Enterprise & Cloud (SAP / Web)",
@@ -540,73 +583,10 @@ export const portfolioData = {
         github: "https://github.com/Atchyuteswar",
       },
     },
-    {
-      id: "PRJ-CAP-01",
-      title: "[College Major / Mini Project Placeholder #1 — Ready for Your Details]",
-      subtitle: "B.Tech. CSE (Data Science) Academic / Patent-Linked Project Slot",
-      category: "College & Capstone Placeholders",
-      semester: "Sem VI / VII (2026)",
-      courseOrLab: "MLRITM Dept. of CSE (Data Science)",
-      advisor: "[Faculty Guide Name]",
-      featured: false,
-      status: "Patent / Research Slot",
-      summary:
-        "Placeholder slot for your B.Tech. Major Project, Mini Project, or Patent-backed college prototype at MLRITM. Share your project title, abstract, and tech stack anytime to replace this card.",
-      problemStatement:
-        "Replace with the problem statement addressed by your college capstone or mini project.",
-      methodology: [
-        "Step 1: Data collection / hardware setup / system architecture.",
-        "Step 2: Core algorithm, ML model, or full-stack implementation.",
-        "Step 3: Evaluation, testing, and faculty review / patent filing.",
-      ],
-      outcomes: [
-        "Ready to link directly to your filed patent (PAT-01) and B.Tech thesis report.",
-      ],
-      metrics: [
-        { label: "Type", value: "Academic Capstone" },
-        { label: "Institution", value: "MLRITM" },
-        { label: "Batch", value: "2023–2027" },
-      ],
-      techStack: ["Python", "Data Science", "Machine Learning", "Full-Stack"],
-      links: {
-        github: "https://github.com/Atchyuteswar",
-      },
-    },
-    {
-      id: "PRJ-CAP-02",
-      title: "[College Lab / Coursework Project Placeholder #2 — Ready for Your Details]",
-      subtitle: "Additional Academic Project Slot (DBMS / Compiler Design / Networks / AI)",
-      category: "College & Capstone Placeholders",
-      semester: "Sem V / VI (2025–2026)",
-      courseOrLab: "MLRITM Coursework / Research Lab",
-      featured: false,
-      status: "Patent / Research Slot",
-      summary:
-        "Second placeholder slot for any additional college projects, hackathons, or patent prototypes you want to showcase. Easily duplicate or edit in `src/data/portfolioData.ts`.",
-      problemStatement:
-        "Replace with the technical challenge explored in this college project.",
-      methodology: [
-        "Describe your architecture, dataset, or implementation approach.",
-        "Highlight key experiments or benchmarks.",
-      ],
-      outcomes: [
-        "Highlight academic grade, demo outcome, or patent disclosure.",
-      ],
-      metrics: [
-        { label: "Category", value: "College Project" },
-        { label: "Status", value: "Placeholder" },
-        { label: "Editable", value: "1-Click TS File" },
-      ],
-      techStack: ["Java", "Python", "SQL", "Next.js"],
-      links: {
-        github: "https://github.com/Atchyuteswar",
-      },
-    },
   ] as ProjectItem[],
 
   // --------------------------------------------------------------------------
   // 5. CERTIFICATIONS, CREDENTIALS & TECHNICAL BADGES (§ 03)
-  // (Populated from all 7 resumes!)
   // --------------------------------------------------------------------------
   certifications: [
     {
@@ -687,8 +667,8 @@ export const portfolioData = {
   education: {
     degreeTitle: "Bachelor of Technology (B.Tech.) — Computer Science & Engineering (Data Science)",
     institution: "Marri Laxman Reddy Institute of Technology and Management (MLRITM)",
-    location: "Hyderabad, Telangana, India",
-    duration: "2023 — March 2027 (Expected Graduation)",
+    location: "Dundigal, Hyderabad - 500043, Telangana, India",
+    duration: "2023 — March 2027 (Expected Graduation · Roll No. 237Y1A67D3)",
     cgpa: "7.65 / 10.0",
     priorEducation: {
       level: "Intermediate MPC (Mathematics, Physics, Chemistry — Science)",
@@ -696,10 +676,10 @@ export const portfolioData = {
       duration: "2021 — 2023",
     },
     thesisTitle:
-      "Applied Data Science, Multimodal AI Systems & Enterprise Cloud Extensibility (B.Tech. Capstone & Patent Portfolio)",
-    advisor: "Department of CSE (Data Science), MLRITM",
+      "Portable Multimodal AI-Assisted Osteoarthritis Risk Screening and Early Detection System (Indian Patent Application No. 202641112485)",
+    advisor: "Prof. Kavati Sridhar (ECE), Prof. Banoth Prasad (CSE) & Dr. S. P. Jani (MLRITM)",
     honors: [
-      "Filed Collegiate Utility Patents as an Undergraduate Innovator at MLRITM",
+      "Filed Utility Patent Co-Inventor — Indian Patent Application No. 202641112485 (Form 2 Complete Specification, MLRITM & MLRIT)",
       "SAP Certified Back-End Developer — ABAP Cloud (Credential ID: 09dc84ad-438c-4d0e-a216-29110195af66)",
       "Head of Hyderabad Chapter — Big Blockers Community (Grew chapter to 1,000+ members & trained 700+ students)",
       "Earned 30+ Verified Industry Certifications & Cloud/AI Skill Badges (Google Cloud, AWS, NVIDIA, Cisco, Microsoft)",
@@ -736,12 +716,12 @@ export const portfolioData = {
         period: "2025 – 2026",
         status: "Completed",
         sgpa: "Completed",
-        highlight: "Computer Networks, Compiler Design, Aira NLP Companion & Patent Disclosures",
+        highlight: "Computer Networks, Compiler Design, Aira NLP Companion & Multimodal Edge-AI Research",
         courses: [
           { code: "CS301", name: "Computer Networks & Protocol Engineering", tag: "Core CS" },
           { code: "CS302", name: "Compiler Design & Formal Languages", tag: "Core CS" },
           { code: "DS305", name: "Machine Learning, NLP & Dataset Curation", tag: "Data Science" },
-          { code: "IP390", name: "Collegiate Patent Drafting & Research Prototyping", tag: "Capstone" },
+          { code: "IP390", name: "Multimodal Sensor Fusion & Edge-AI Prototyping", tag: "Capstone" },
         ],
       },
       {
@@ -749,8 +729,9 @@ export const portfolioData = {
         period: "Aug 2026 – Dec 2026",
         status: "Current Semester",
         sgpa: "7.65 CGPA",
-        highlight: "Naxrita SAP ABAP Internship, SAP Cloud Certification, AWS Foundations & Major Project Phase I",
+        highlight: "Patent Filing (App. 202641112485), Naxrita SAP ABAP Internship & SAP Cloud Certification",
         courses: [
+          { code: "PAT-26", name: "Patent Filing: Multimodal AI Osteoarthritis Screening (202641112485)", tag: "Capstone" },
           { code: "CS401", name: "Enterprise Systems & SAP ABAP Cloud (RAP / CDS)", tag: "Systems" },
           { code: "DS402", name: "Deep Learning & Multimodal Generative AI (Gemini / Vertex)", tag: "Data Science" },
           { code: "CS498", name: "B.Tech. Major Capstone Project — Phase I", tag: "Capstone" },

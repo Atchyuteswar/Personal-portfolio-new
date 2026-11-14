@@ -16,10 +16,10 @@ import {
 
 const CATEGORIES = [
   "All",
+  "Patented Healthcare & Edge AI",
   "AI, ML & Data Science",
   "Enterprise & Cloud (SAP / Web)",
   "Web3 & Blockchain",
-  "College & Capstone Placeholders",
 ] as const;
 
 export default function ProjectSection() {
