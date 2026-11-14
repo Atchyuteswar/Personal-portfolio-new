@@ -372,16 +372,16 @@ export const portfolioData = {
         "Published full v1.0.0 release with live Streamlit deployment, public Hugging Face model repository, and portable project-relative split manifests.",
       ],
       metrics: [
-        { label: "Best Test Accuracy", value: "91.29% (VGG19)" },
-        { label: "Dataset Split", value: "2,526 Images" },
-        { label: "Architectures", value: "4 CNN Models" },
+        { label: "VGG19 Test Acc.", value: "91.29%" },
+        { label: "Dataset Split", value: "2,526 Imgs" },
+        { label: "Architectures", value: "4 CNNs" },
       ],
       benchmarkTable: {
         caption:
           "Held-out evaluation across all 4 trained architectures on the identical 379-image test split (Seed 42):",
         rows: [
           {
-            model: "VGG19 (Best Accuracy)",
+            model: "VGG19",
             accuracy: "91.29%",
             precision: "90.43%",
             recall: "89.76%",
@@ -398,7 +398,7 @@ export const portfolioData = {
             size: "111.76 MB",
           },
           {
-            model: "MobileNetV2 (Best Size/Acc Trade-off)",
+            model: "MobileNetV2",
             accuracy: "87.07%",
             precision: "87.29%",
             recall: "85.67%",
@@ -406,7 +406,7 @@ export const portfolioData = {
             size: "22.60 MB",
           },
           {
-            model: "Custom CNN (4-Block Baseline)",
+            model: "Custom CNN (4-Block)",
             accuracy: "73.09%",
             precision: "70.27%",
             recall: "72.12%",
@@ -417,11 +417,11 @@ export const portfolioData = {
       },
       caseStudySections: {
         workflow: [
-          "1. Image Input: User uploads an RGB waste image via the Streamlit interface.",
-          "2. Image Preparation: EXIF orientation is normalized, converted to 3-channel RGB, and resized to 224 × 224 using TensorFlow bilinear interpolation (`antialias=False`).",
-          "3. Model-Specific Preprocessing: Applies exact training normalization (`[0, 1]` for Custom CNN; `* 255` then architecture-specific `preprocess_input` for MobileNetV2, VGG16, and VGG19).",
-          "4. On-Demand Inference: Selected `.keras` model is pulled from Hugging Face Hub (cached 1 model at a time to bound RAM) to produce 6 class scores.",
-          "5. Presentation & Analytics: Displays predicted category, 6-class probability distribution, disposal guidance, and comparative training/test analytics.",
+          "Image Input: User uploads an RGB waste image via the Streamlit interface.",
+          "Image Preparation: EXIF orientation is normalized, converted to 3-channel RGB, and resized to 224 × 224 using TensorFlow bilinear interpolation (`antialias=False`).",
+          "Model-Specific Preprocessing: Applies exact training normalization (`[0, 1]` for Custom CNN; `* 255` then architecture-specific `preprocess_input` for MobileNetV2, VGG16, and VGG19).",
+          "On-Demand Inference: Selected `.keras` model is pulled from Hugging Face Hub (cached 1 model at a time to bound RAM) to produce 6 class scores.",
+          "Presentation & Analytics: Displays predicted category, 6-class probability distribution, disposal guidance, and comparative training/test analytics.",
         ],
         preprocessingNotes: [
           { model: "Custom CNN", transform: "Common RGB tensor normalized to [0, 1]" },

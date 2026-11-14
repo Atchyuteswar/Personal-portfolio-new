@@ -28,6 +28,46 @@ const CATEGORIES = [
   "Web3 & Blockchain",
 ] as const;
 
+/**
+ * Helper to render inline backticks (`code`) as styled monospace pills
+ * and bold any leading "Label:" prefix for clean academic typography.
+ */
+function renderInlineCode(text: string): React.ReactNode[] {
+  const parts = text.split(/(`[^`]+`)/g);
+  return parts.map((part, idx) => {
+    if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
+      return (
+        <code
+          key={idx}
+          className="px-1.5 py-0.5 mx-0.5 rounded bg-[#F3EFE6] dark:bg-[#222731] font-mono text-[11px] text-[#9E2A2B] dark:text-[#E06D53] border border-[#DED8C8] dark:border-[#2F3643]"
+        >
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    return <React.Fragment key={idx}>{part}</React.Fragment>;
+  });
+}
+
+function renderRichStep(text: string): React.ReactNode {
+  // Strip any accidental leading "1. ", "2. " numbering
+  const cleaned = text.replace(/^\d+\.\s+/, "");
+  const colonIdx = cleaned.indexOf(":");
+  if (colonIdx > 0 && colonIdx < 48) {
+    const label = cleaned.slice(0, colonIdx + 1);
+    const rest = cleaned.slice(colonIdx + 1);
+    return (
+      <>
+        <strong className="font-semibold text-[#161615] dark:text-[#ECE8E1]">
+          {label}
+        </strong>
+        {renderInlineCode(rest)}
+      </>
+    );
+  }
+  return renderInlineCode(cleaned);
+}
+
 export default function ProjectSection() {
   const { projects } = portfolioData;
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -144,11 +184,11 @@ export default function ProjectSection() {
             {filteredProjects.map((project) => (
               <article
                 key={project.id}
-                className="flex flex-col justify-between rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] overflow-hidden shadow-sm hover:border-[#9E2A2B]/60 dark:hover:border-[#E06D53]/60 transition-colors"
+                className="h-full flex flex-col justify-between rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] overflow-hidden shadow-sm hover:border-[#9E2A2B]/60 dark:hover:border-[#E06D53]/60 transition-colors"
               >
-                <div>
+                <div className="flex-1 flex flex-col">
                   {/* Card Top Index Header */}
-                  <div className="px-4 sm:px-5 py-2.5 sm:py-3 bg-[#F3EFE6]/70 dark:bg-[#14181D] border-b border-[#DED8C8] dark:border-[#272D37] flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] sm:text-xs">
+                  <div className="px-4 sm:px-5 py-2.5 sm:py-3 bg-[#F3EFE6]/70 dark:bg-[#14181D] border-b border-[#DED8C8] dark:border-[#272D37] flex items-center justify-between gap-2 font-mono text-[11px] sm:text-xs">
                     <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
                       <span className="font-bold text-[#9E2A2B] dark:text-[#E06D53] shrink-0">
                         [{project.id}]
@@ -157,67 +197,71 @@ export default function ProjectSection() {
                         {project.category}
                       </span>
                     </div>
-                    <span className="text-[10px] sm:text-[11px] text-[#78756F] dark:text-[#A7ACB4] shrink-0">
+                    <span className="text-[10px] sm:text-[11px] text-[#78756F] dark:text-[#A7ACB4] truncate max-w-[45%] text-right">
                       {project.semester}
                     </span>
                   </div>
 
                   {/* Main Content */}
-                  <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4">
-                    <div className="space-y-1.5">
-                      <div className="flex flex-wrap items-center justify-between gap-1.5">
-                        <div className="font-mono text-[10px] sm:text-[11px] text-[#1D3557] dark:text-[#6CA0DC] break-words">
-                          {project.courseOrLab}
-                          {project.advisor ? ` · Guide: ${project.advisor}` : ""}
+                  <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="space-y-3">
+                      <div className="space-y-1.5">
+                        <div className="flex flex-wrap items-center justify-between gap-1.5">
+                          <div className="font-mono text-[10px] sm:text-[11px] text-[#1D3557] dark:text-[#6CA0DC] break-words">
+                            {project.courseOrLab}
+                            {project.advisor ? ` · Guide: ${project.advisor}` : ""}
+                          </div>
+                          {(project.benchmarkTable || project.caseStudySections) && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#9E2A2B]/10 text-[#9E2A2B] dark:bg-[#E06D53]/15 dark:text-[#E06D53] border border-[#9E2A2B]/30 dark:border-[#E06D53]/30 shrink-0">
+                              <BarChart3 className="w-3 h-3" />
+                              <span>Case Study + Benchmark</span>
+                            </span>
+                          )}
                         </div>
-                        {(project.benchmarkTable || project.caseStudySections) && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#9E2A2B]/10 text-[#9E2A2B] dark:bg-[#E06D53]/15 dark:text-[#E06D53] border border-[#9E2A2B]/30 dark:border-[#E06D53]/30 shrink-0">
-                            <BarChart3 className="w-3 h-3" />
-                            <span>Case Study + Benchmark</span>
-                          </span>
-                        )}
+                        <h3 className="font-serif text-lg sm:text-xl font-medium text-[#161615] dark:text-[#ECE8E1] leading-snug break-words">
+                          {project.title}
+                        </h3>
+                        <p className="font-serif italic text-xs sm:text-sm text-[#78756F] dark:text-[#A7ACB4] break-words">
+                          {project.subtitle}
+                        </p>
                       </div>
-                      <h3 className="font-serif text-lg sm:text-xl font-medium text-[#161615] dark:text-[#ECE8E1] leading-snug break-words">
-                        {project.title}
-                      </h3>
-                      <p className="font-serif italic text-xs sm:text-sm text-[#78756F] dark:text-[#A7ACB4] break-words">
-                        {project.subtitle}
+
+                      <p className="text-xs sm:text-sm leading-relaxed text-[#52504C] dark:text-[#A7ACB4]">
+                        {project.summary}
                       </p>
                     </div>
 
-                    <p className="text-xs sm:text-sm leading-relaxed text-[#52504C] dark:text-[#A7ACB4]">
-                      {project.summary}
-                    </p>
+                    <div className="space-y-3 pt-1">
+                      {/* Empirical Metrics Strip */}
+                      {project.metrics && project.metrics.length > 0 && (
+                        <div className="grid grid-cols-3 gap-2">
+                          {project.metrics.map((m, idx) => (
+                            <div
+                              key={idx}
+                              className="p-2 sm:p-2.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] flex flex-col justify-between"
+                            >
+                              <div className="font-serif font-bold text-xs sm:text-sm text-[#161615] dark:text-[#ECE8E1] leading-tight break-words">
+                                {m.value}
+                              </div>
+                              <div className="font-mono text-[9px] sm:text-[10px] text-[#78756F] dark:text-[#A7ACB4] leading-tight mt-0.5 break-words">
+                                {m.label}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
 
-                    {/* Empirical Metrics Strip: 1 col on tiny screens, 3 cols on 380px+ */}
-                    {project.metrics && project.metrics.length > 0 && (
-                      <div className="grid grid-cols-1 xs:grid-cols-3 gap-2 pt-1">
-                        {project.metrics.map((m, idx) => (
-                          <div
-                            key={idx}
-                            className="p-2.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] flex xs:block items-center justify-between"
+                      {/* Tech Stack Pills */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.techStack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono bg-[#F3EFE6] dark:bg-[#14181D] text-[#52504C] dark:text-[#A7ACB4] border border-[#DED8C8]/70 dark:border-[#272D37]"
                           >
-                            <div className="font-serif font-bold text-sm sm:text-base text-[#161615] dark:text-[#ECE8E1] truncate">
-                              {m.value}
-                            </div>
-                            <div className="font-mono text-[10px] text-[#78756F] dark:text-[#A7ACB4] truncate">
-                              {m.label}
-                            </div>
-                          </div>
+                            {tech}
+                          </span>
                         ))}
                       </div>
-                    )}
-
-                    {/* Tech Stack Pills */}
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {project.techStack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono bg-[#F3EFE6] dark:bg-[#14181D] text-[#52504C] dark:text-[#A7ACB4] border border-[#DED8C8]/70 dark:border-[#272D37]"
-                        >
-                          {tech}
-                        </span>
-                      ))}
                     </div>
                   </div>
                 </div>
@@ -340,18 +384,18 @@ export default function ProjectSection() {
           </div>
         )}
 
-        {/* Interactive Project Dossier Modal (Bottom-sheet on mobile, centered dialog on sm+) */}
+        {/* Interactive Project Dossier Modal (Fixed Header + Scrollable Body + Fixed Footer) */}
         {selectedProject && (
           <div
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-y-auto"
+            className="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4"
             onClick={() => setSelectedProject(null)}
           >
             <div
-              className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-xl border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] shadow-2xl p-4 sm:p-8 space-y-5 sm:space-y-6"
+              className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[88vh] flex flex-col overflow-hidden rounded-t-2xl sm:rounded-xl border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Modal Header */}
-              <div className="sticky top-0 z-10 bg-[#FAF7F2]/95 dark:bg-[#14181D]/95 backdrop-blur-sm flex items-start justify-between gap-3 border-b border-[#DED8C8] dark:border-[#272D37] pb-3 sm:pb-4">
+              {/* 1. Fixed Modal Header (Never lets scrolled content bleed above it) */}
+              <div className="shrink-0 bg-[#FAF7F2] dark:bg-[#14181D] flex items-start justify-between gap-3 border-b border-[#DED8C8] dark:border-[#272D37] px-4 sm:px-7 py-4 sm:py-5">
                 <div className="space-y-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-[11px] sm:text-xs text-[#9E2A2B] dark:text-[#E06D53]">
                     <span className="font-bold">[{selectedProject.id}]</span>
@@ -360,7 +404,7 @@ export default function ProjectSection() {
                     <span>·</span>
                     <span>{selectedProject.semester}</span>
                   </div>
-                  <h3 className="font-serif text-xl sm:text-3xl text-[#161615] dark:text-[#ECE8E1] leading-snug break-words">
+                  <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-[#161615] dark:text-[#ECE8E1] leading-snug break-words">
                     {selectedProject.title}
                   </h3>
                   <p className="font-mono text-[11px] sm:text-xs text-[#52504C] dark:text-[#A7ACB4]">
@@ -378,225 +422,232 @@ export default function ProjectSection() {
                 </button>
               </div>
 
-              {/* Problem Statement */}
-              <div className="p-3.5 sm:p-4 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] space-y-1.5">
-                <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#9E2A2B] dark:text-[#E06D53] font-semibold">
-                  1. Problem Formulation &amp; Motivation
+              {/* 2. Scrollable Modal Body */}
+              <div className="flex-1 overflow-y-auto px-4 sm:px-7 py-5 sm:py-6 space-y-6">
+                {/* Problem Statement */}
+                <div className="p-4 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] space-y-1.5">
+                  <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#9E2A2B] dark:text-[#E06D53] font-semibold">
+                    1. Problem Formulation &amp; Motivation
+                  </div>
+                  <p className="text-xs sm:text-sm leading-relaxed text-[#52504C] dark:text-[#A7ACB4]">
+                    {renderInlineCode(selectedProject.problemStatement)}
+                  </p>
                 </div>
-                <p className="text-xs sm:text-sm leading-relaxed text-[#52504C] dark:text-[#A7ACB4]">
-                  {selectedProject.problemStatement}
-                </p>
-              </div>
 
-              {/* Held-Out Test Benchmark Table (when available, e.g., WasteAI) */}
-              {selectedProject.benchmarkTable &&
-                selectedProject.benchmarkTable.rows.length > 0 && (
-                  <div className="space-y-2.5">
-                    <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
-                      <BarChart3 className="w-4 h-4 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
-                      <span>{selectedProject.benchmarkTable.caption}</span>
-                    </div>
-                    <div className="overflow-x-auto rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22]">
-                      <table className="w-full min-w-[540px] text-left border-collapse text-xs font-mono">
-                        <thead>
-                          <tr className="border-b border-[#DED8C8] dark:border-[#272D37] bg-[#F3EFE6]/80 dark:bg-[#14181D] text-[10px] sm:text-[11px] uppercase text-[#52504C] dark:text-[#A7ACB4]">
-                            <th className="py-2.5 px-3">Model Architecture</th>
-                            <th className="py-2.5 px-3">Accuracy</th>
-                            <th className="py-2.5 px-3">Macro Precision</th>
-                            <th className="py-2.5 px-3">Macro Recall</th>
-                            <th className="py-2.5 px-3">Macro F1</th>
-                            <th className="py-2.5 px-3 text-right">Model Size</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-[#DED8C8] dark:divide-[#272D37]">
-                          {selectedProject.benchmarkTable.rows.map((row) => (
-                            <tr
-                              key={row.model}
-                              className={
-                                row.highlight
-                                  ? "bg-[#9E2A2B]/10 dark:bg-[#E06D53]/15 font-semibold text-[#161615] dark:text-[#ECE8E1]"
-                                  : "text-[#52504C] dark:text-[#A7ACB4]"
-                              }
-                            >
-                              <td className="py-2.5 px-3 flex items-center gap-1.5">
-                                <span>{row.model}</span>
-                                {row.highlight && (
-                                  <span className="px-1.5 py-0.5 rounded text-[9px] uppercase bg-[#9E2A2B] text-white dark:bg-[#E06D53] dark:text-[#0D0F12]">
-                                    Best
-                                  </span>
-                                )}
-                              </td>
-                              <td className="py-2.5 px-3 text-[#9E2A2B] dark:text-[#E06D53] font-bold">
-                                {row.accuracy}
-                              </td>
-                              <td className="py-2.5 px-3">{row.precision}</td>
-                              <td className="py-2.5 px-3">{row.recall}</td>
-                              <td className="py-2.5 px-3">{row.f1}</td>
-                              <td className="py-2.5 px-3 text-right">{row.size}</td>
+                {/* Held-Out Test Benchmark Table (when available, e.g., WasteAI) */}
+                {selectedProject.benchmarkTable &&
+                  selectedProject.benchmarkTable.rows.length > 0 && (
+                    <div className="space-y-2.5">
+                      <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
+                        <BarChart3 className="w-4 h-4 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
+                        <span>{selectedProject.benchmarkTable.caption}</span>
+                      </div>
+                      <div className="overflow-x-auto rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22]">
+                        <table className="w-full min-w-[540px] text-left border-collapse text-xs font-mono">
+                          <thead>
+                            <tr className="border-b border-[#DED8C8] dark:border-[#272D37] bg-[#F3EFE6]/80 dark:bg-[#14181D] text-[10px] sm:text-[11px] uppercase text-[#52504C] dark:text-[#A7ACB4]">
+                              <th className="py-2.5 px-3.5">Model Architecture</th>
+                              <th className="py-2.5 px-3">Accuracy</th>
+                              <th className="py-2.5 px-3">Macro Precision</th>
+                              <th className="py-2.5 px-3">Macro Recall</th>
+                              <th className="py-2.5 px-3">Macro F1</th>
+                              <th className="py-2.5 px-3.5 text-right">Model Size</th>
                             </tr>
+                          </thead>
+                          <tbody className="divide-y divide-[#DED8C8] dark:divide-[#272D37]">
+                            {selectedProject.benchmarkTable.rows.map((row) => (
+                              <tr
+                                key={row.model}
+                                className={
+                                  row.highlight
+                                    ? "bg-[#9E2A2B]/10 dark:bg-[#E06D53]/15 font-semibold text-[#161615] dark:text-[#ECE8E1]"
+                                    : "text-[#52504C] dark:text-[#A7ACB4]"
+                                }
+                              >
+                                <td className="py-2.5 px-3.5 flex items-center gap-2">
+                                  <span>{row.model}</span>
+                                  {row.highlight && (
+                                    <span className="px-1.5 py-0.5 rounded text-[9px] uppercase bg-[#9E2A2B] text-white dark:bg-[#E06D53] dark:text-[#0D0F12]">
+                                      Best
+                                    </span>
+                                  )}
+                                </td>
+                                <td className="py-2.5 px-3 text-[#9E2A2B] dark:text-[#E06D53] font-bold">
+                                  {row.accuracy}
+                                </td>
+                                <td className="py-2.5 px-3">{row.precision}</td>
+                                <td className="py-2.5 px-3">{row.recall}</td>
+                                <td className="py-2.5 px-3">{row.f1}</td>
+                                <td className="py-2.5 px-3.5 text-right">{row.size}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+
+                {/* Methodology & Architecture */}
+                <div className="space-y-2.5">
+                  <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
+                    <Layers className="w-4 h-4 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
+                    <span>2. System Architecture &amp; Implementation</span>
+                  </div>
+                  <ul className="space-y-2.5 pl-1">
+                    {selectedProject.methodology.map((step, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
+                      >
+                        <span className="font-mono text-xs font-bold text-[#9E2A2B] dark:text-[#E06D53] mt-0.5 shrink-0">
+                          0{i + 1}.
+                        </span>
+                        <span className="leading-relaxed">{renderRichStep(step)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Extended Case Study Sections (Workflow, Preprocessing, Engineering Decisions, Limitations, Future Work) */}
+                {selectedProject.caseStudySections && (
+                  <div className="space-y-6 pt-3 border-t border-[#DED8C8]/70 dark:border-[#272D37]">
+                    {/* End-to-End System Workflow */}
+                    {selectedProject.caseStudySections.workflow && (
+                      <div className="space-y-2.5">
+                        <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
+                          <Cpu className="w-4 h-4 text-[#1D3557] dark:text-[#6CA0DC] shrink-0" />
+                          <span>End-to-End System &amp; Inference Workflow</span>
+                        </div>
+                        <div className="grid grid-cols-1 gap-2.5">
+                          {selectedProject.caseStudySections.workflow.map((step, idx) => (
+                            <div
+                              key={idx}
+                              className="p-3 sm:p-3.5 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] flex items-start gap-3 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
+                            >
+                              <span className="mt-0.5 px-2 py-0.5 rounded bg-[#F3EFE6] dark:bg-[#222731] border border-[#DED8C8]/80 dark:border-[#2F3643] font-mono text-[10px] font-bold text-[#1D3557] dark:text-[#6CA0DC] shrink-0">
+                                STEP 0{idx + 1}
+                              </span>
+                              <div className="leading-relaxed flex-1">
+                                {renderRichStep(step)}
+                              </div>
+                            </div>
                           ))}
-                        </tbody>
-                      </table>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Preprocessing Parity Notes (Balanced 2x2 Grid for 4 CNN Models) */}
+                    {selectedProject.caseStudySections.preprocessingNotes && (
+                      <div className="space-y-2.5">
+                        <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold">
+                          Input Transformation &amp; Preprocessing Parity
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                          {selectedProject.caseStudySections.preprocessingNotes.map(
+                            (note, idx) => (
+                              <div
+                                key={idx}
+                                className="p-3 sm:p-3.5 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] flex flex-col justify-between gap-1 text-xs font-mono"
+                              >
+                                <div className="font-bold text-[#9E2A2B] dark:text-[#E06D53]">
+                                  {note.model}
+                                </div>
+                                <div className="text-[11px] text-[#52504C] dark:text-[#A7ACB4] leading-relaxed">
+                                  {note.transform}
+                                </div>
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Engineering Challenges & Design Decisions */}
+                    {selectedProject.caseStudySections.challengesAndDecisions && (
+                      <div className="space-y-2.5">
+                        <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
+                          <span>Engineering Challenges &amp; Design Decisions</span>
+                        </div>
+                        <ul className="space-y-2 pl-1">
+                          {selectedProject.caseStudySections.challengesAndDecisions.map(
+                            (decision, idx) => (
+                              <li
+                                key={idx}
+                                className="flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
+                              >
+                                <span className="font-mono text-xs font-bold text-[#9E2A2B] dark:text-[#E06D53] mt-0.5 shrink-0">
+                                  →
+                                </span>
+                                <span className="leading-relaxed">
+                                  {renderRichStep(decision)}
+                                </span>
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Limitations & Future Work Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                      {selectedProject.caseStudySections.limitations && (
+                        <div className="p-4 rounded-lg border border-amber-600/30 bg-amber-500/5 space-y-2">
+                          <div className="font-mono text-[11px] uppercase tracking-wider text-amber-800 dark:text-amber-400 font-semibold flex items-center gap-1.5">
+                            <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                            <span>Limitations &amp; Responsible Use</span>
+                          </div>
+                          <p className="text-xs text-[#52504C] dark:text-[#A7ACB4] leading-relaxed">
+                            {selectedProject.caseStudySections.limitations}
+                          </p>
+                        </div>
+                      )}
+
+                      {selectedProject.caseStudySections.futureWork && (
+                        <div className="p-4 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] space-y-2">
+                          <div className="font-mono text-[11px] uppercase tracking-wider text-[#1D3557] dark:text-[#6CA0DC] font-semibold">
+                            Future Research &amp; Engineering Roadmap
+                          </div>
+                          <ul className="space-y-1.5 text-xs text-[#52504C] dark:text-[#A7ACB4]">
+                            {selectedProject.caseStudySections.futureWork.map((fw, i) => (
+                              <li key={i} className="leading-relaxed">
+                                • {fw}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
 
-              {/* Methodology & Architecture */}
-              <div className="space-y-2">
-                <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
-                  <span>2. System Architecture &amp; Implementation</span>
-                </div>
-                <ul className="space-y-2 pl-1">
-                  {selectedProject.methodology.map((step, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
-                    >
-                      <span className="font-mono text-xs font-bold text-[#9E2A2B] dark:text-[#E06D53] mt-0.5 shrink-0">
-                        0{i + 1}.
-                      </span>
-                      <span className="leading-relaxed">{step}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Extended Case Study Sections (Workflow, Preprocessing, Engineering Decisions, Limitations, Future Work) */}
-              {selectedProject.caseStudySections && (
-                <div className="space-y-5 pt-2 border-t border-[#DED8C8]/70 dark:border-[#272D37]">
-                  {/* End-to-End System Workflow */}
-                  {selectedProject.caseStudySections.workflow && (
-                    <div className="space-y-2">
-                      <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
-                        <Cpu className="w-4 h-4 text-[#1D3557] dark:text-[#6CA0DC] shrink-0" />
-                        <span>End-to-End System &amp; Inference Workflow</span>
-                      </div>
-                      <div className="grid grid-cols-1 gap-2">
-                        {selectedProject.caseStudySections.workflow.map((step, idx) => (
-                          <div
-                            key={idx}
-                            className="p-3 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
-                          >
-                            <span className="px-1.5 py-0.5 rounded bg-[#F3EFE6] dark:bg-[#14181D] font-mono text-[10px] font-bold text-[#1D3557] dark:text-[#6CA0DC] shrink-0">
-                              STEP {idx + 1}
-                            </span>
-                            <span className="leading-relaxed">{step}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Preprocessing Parity Notes */}
-                  {selectedProject.caseStudySections.preprocessingNotes && (
-                    <div className="space-y-2">
-                      <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold">
-                        Input Transformation &amp; Preprocessing Parity
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                        {selectedProject.caseStudySections.preprocessingNotes.map(
-                          (note, idx) => (
-                            <div
-                              key={idx}
-                              className="p-3 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] space-y-1 text-[11px] sm:text-xs font-mono"
-                            >
-                              <div className="font-bold text-[#9E2A2B] dark:text-[#E06D53]">
-                                {note.model}
-                              </div>
-                              <div className="text-[#52504C] dark:text-[#A7ACB4] leading-relaxed">
-                                {note.transform}
-                              </div>
-                            </div>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Engineering Challenges & Design Decisions */}
-                  {selectedProject.caseStudySections.challengesAndDecisions && (
-                    <div className="space-y-2">
-                      <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
-                        <span>Engineering Challenges &amp; Design Decisions</span>
-                      </div>
-                      <ul className="space-y-2 pl-1">
-                        {selectedProject.caseStudySections.challengesAndDecisions.map(
-                          (decision, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
-                            >
-                              <span className="font-mono text-xs font-bold text-[#9E2A2B] dark:text-[#E06D53] mt-0.5 shrink-0">
-                                →
-                              </span>
-                              <span className="leading-relaxed">{decision}</span>
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* Limitations & Future Work Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                    {selectedProject.caseStudySections.limitations && (
-                      <div className="p-3.5 rounded-lg border border-amber-600/30 bg-amber-500/5 space-y-2">
-                        <div className="font-mono text-[11px] uppercase tracking-wider text-amber-800 dark:text-amber-400 font-semibold flex items-center gap-1.5">
-                          <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-                          <span>Limitations &amp; Responsible Use</span>
-                        </div>
-                        <p className="text-xs text-[#52504C] dark:text-[#A7ACB4] leading-relaxed">
-                          {selectedProject.caseStudySections.limitations}
-                        </p>
-                      </div>
-                    )}
-
-                    {selectedProject.caseStudySections.futureWork && (
-                      <div className="p-3.5 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] space-y-2">
-                        <div className="font-mono text-[11px] uppercase tracking-wider text-[#1D3557] dark:text-[#6CA0DC] font-semibold">
-                          Future Research &amp; Engineering Roadmap
-                        </div>
-                        <ul className="space-y-1.5 text-xs text-[#52504C] dark:text-[#A7ACB4]">
-                          {selectedProject.caseStudySections.futureWork.map((fw, i) => (
-                            <li key={i} className="leading-relaxed">
-                              • {fw}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                {/* Empirical Outcomes */}
+                <div className="space-y-2.5">
+                  <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>3. Key Outcomes &amp; Deliverables</span>
                   </div>
+                  <ul className="space-y-2 pl-1">
+                    {selectedProject.outcomes.map((outcome, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
+                      >
+                        <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                        <span className="leading-relaxed">{renderRichStep(outcome)}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              )}
-
-              {/* Empirical Outcomes */}
-              <div className="space-y-2">
-                <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#161615] dark:text-[#ECE8E1] font-semibold flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>3. Key Outcomes &amp; Deliverables</span>
-                </div>
-                <ul className="space-y-2 pl-1">
-                  {selectedProject.outcomes.map((outcome, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
-                    >
-                      <span className="text-emerald-600 font-bold shrink-0">✓</span>
-                      <span className="leading-relaxed">{outcome}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
 
-              {/* Tech Stack & Links Footer */}
-              <div className="pt-4 border-t border-[#DED8C8] dark:border-[#272D37] flex flex-col gap-4">
+              {/* 3. Fixed Modal Footer (Tech Stack & Action Links) */}
+              <div className="shrink-0 bg-[#FAF7F2] dark:bg-[#14181D] px-4 sm:px-7 py-3.5 sm:py-4 border-t border-[#DED8C8] dark:border-[#272D37] flex flex-col gap-3">
                 <div className="flex flex-wrap gap-1.5">
                   {selectedProject.techStack.map((t) => (
                     <span
                       key={t}
-                      className="px-2 py-1 rounded text-[11px] font-mono bg-white dark:bg-[#181C22] border border-[#DED8C8] dark:border-[#272D37]"
+                      className="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono bg-white dark:bg-[#181C22] border border-[#DED8C8] dark:border-[#272D37] text-[#52504C] dark:text-[#A7ACB4]"
                     >
                       {t}
                     </span>
@@ -609,7 +660,7 @@ export default function ProjectSection() {
                       href={selectedProject.links.liveDemo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded bg-[#9E2A2B] text-white dark:bg-[#E06D53] dark:text-[#0D0F12] text-xs font-mono font-semibold"
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded bg-[#9E2A2B] text-white dark:bg-[#E06D53] dark:text-[#0D0F12] text-xs font-mono font-semibold hover:opacity-95 transition-opacity"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>Live Deployment</span>
@@ -620,7 +671,7 @@ export default function ProjectSection() {
                       href={selectedProject.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded bg-[#161615] text-white dark:bg-[#ECE8E1] dark:text-[#0D0F12] text-xs font-mono font-semibold"
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded bg-[#161615] text-white dark:bg-[#ECE8E1] dark:text-[#0D0F12] text-xs font-mono font-semibold hover:opacity-95 transition-opacity"
                     >
                       <Github className="w-3.5 h-3.5" />
                       <span>GitHub Repository</span>
@@ -631,7 +682,7 @@ export default function ProjectSection() {
                       href={selectedProject.links.huggingFace}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] text-[#161615] dark:text-[#ECE8E1] hover:border-[#9E2A2B] text-xs font-mono font-semibold"
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] text-[#161615] dark:text-[#ECE8E1] hover:border-[#9E2A2B] text-xs font-mono font-semibold transition-colors"
                     >
                       <Database className="w-3.5 h-3.5 text-[#9E2A2B] dark:text-[#E06D53]" />
                       <span>Hugging Face Models</span>
@@ -642,7 +693,7 @@ export default function ProjectSection() {
                       href={selectedProject.links.releaseTag}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] text-[#161615] dark:text-[#ECE8E1] hover:border-[#9E2A2B] text-xs font-mono font-semibold"
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] text-[#161615] dark:text-[#ECE8E1] hover:border-[#9E2A2B] text-xs font-mono font-semibold transition-colors"
                     >
                       <Tag className="w-3.5 h-3.5 text-[#1D3557] dark:text-[#6CA0DC]" />
                       <span>Release v1.0.0</span>
