@@ -222,9 +222,9 @@ export const portfolioData = {
     },
     {
       code: "RV-02",
-      title: "Deep Learning, Computer Vision & NLP",
+      title: "Deep Learning & Computer Vision",
       description:
-        "Multi-CNN transfer-learning benchmarks (WasteAI on Hugging Face & Streamlit), custom NLP dataset curation (Aira), and Gemini 2.5 Flash + ML Kit mobile inference (Volt).",
+        "Multi-CNN transfer-learning benchmarks (WasteAI on Hugging Face & Streamlit), reproducible model evaluation, and Gemini 2.5 Flash + ML Kit mobile inference (Volt).",
     },
     {
       code: "RV-03",
@@ -504,47 +504,6 @@ export const portfolioData = {
     },
     {
       id: "PRJ-04",
-      title: "Aira — Custom NLP Emotional Support Companion & FastAPI Engine",
-      subtitle: "Dataset Curation · Model Fine-Tuning (Google Colab) · FastAPI · React Native (Expo)",
-      category: "AI, ML & Data Science",
-      semester: "Sem V (August 2025)",
-      courseOrLab: "Data Science & Natural Language Processing",
-      featured: true,
-      status: "Completed",
-      summary:
-        "Curated a specialized emotional-support conversational dataset, fine-tuned a lightweight NLP model in Google Colab, and deployed it via a FastAPI inference server integrated with a cross-platform React Native (Expo) mobile app.",
-      problemStatement:
-        "Generic off-the-shelf LLM wrappers often lack empathetic tone calibration and lightweight deployment characteristics needed for accessible student mental-wellness support.",
-      methodology: [
-        "Designed and cleaned a custom supervised dataset focused on empathetic active listening and emotional support dialogues.",
-        "Trained and evaluated a lightweight NLP model in Google Colab, optimizing for conversational coherence and low-latency CPU/cloud inference.",
-        "Exposed the trained model via an asynchronous Python FastAPI REST service and built a responsive React Native (Expo) mobile client.",
-      ],
-      outcomes: [
-        "Successfully demonstrated the complete Data Science lifecycle: raw dataset curation → Colab model training → FastAPI serving → mobile UI deployment.",
-        "Published live interactive mobile build on Expo (`expo.dev/accounts/kazexyt/projects/aira-frontend`).",
-      ],
-      metrics: [
-        { label: "Pipeline", value: "End-to-End NLP" },
-        { label: "Backend", value: "Python FastAPI" },
-        { label: "Mobile Client", value: "React Native Expo" },
-      ],
-      techStack: [
-        "Python",
-        "NLP / Model Training",
-        "Dataset Curation",
-        "Google Colab",
-        "FastAPI",
-        "React Native",
-        "Expo",
-      ],
-      links: {
-        github: "https://github.com/Atchyuteswar",
-        liveDemo: "https://expo.dev/accounts/kazexyt/projects/aira-frontend",
-      },
-    },
-    {
-      id: "PRJ-05",
       title: "SAP S/4HANA Clean Core & ABAP RAP Business Object Suite",
       subtitle: "ABAP RESTful Application Programming Model · CDS Views · ADT/Eclipse · BOR",
       category: "Enterprise & Cloud (SAP / Web)",
@@ -585,7 +544,7 @@ export const portfolioData = {
       },
     },
     {
-      id: "PRJ-06",
+      id: "PRJ-05",
       title: "Cryptolit — Full-Stack Web3 Wallet & Decentralized Bounty Platform",
       subtitle: "Next.js · BSV Blockchain · Smart Contracts · Neon DB · Prisma ORM",
       category: "Web3 & Blockchain",
@@ -623,99 +582,6 @@ export const portfolioData = {
       links: {
         github: "https://github.com/Atchyuteswar",
         liveDemo: "https://cryptolit.vercel.app",
-      },
-    },
-    {
-      id: "PRJ-07",
-      title: "BBH-MLRITM — Campus Blockchain Chapter Portal & Event Hub",
-      subtitle: "Official College Club Platform for Big Blockers Hyderabad @ MLRITM",
-      category: "Web3 & Blockchain",
-      semester: "Sem III (December 2024)",
-      courseOrLab: "MLRITM Campus Technical Society",
-      featured: false,
-      status: "Completed",
-      summary:
-        "Designed and deployed the official campus chapter website for Big Blockers Hyderabad at MLRITM (`bbh-mlritm.vercel.app`), showcasing the student leadership roster, technical bootcamps, and event gallery.",
-      problemStatement:
-        "Needed a central digital hub at MLRITM to coordinate blockchain bootcamps, workshop registrations, and event archives for 1,000+ student community members.",
-      methodology: [
-        "Built a fast, mobile-first Next.js web portal featuring structured event listings, core team directories, and workshop photo galleries.",
-        "Deployed with continuous integration on Vercel for instant updates during campus hackathons and seminars.",
-      ],
-      outcomes: [
-        "Supported campus outreach across 3+ major blockchain bootcamps and workshops training 700+ students.",
-      ],
-      metrics: [
-        { label: "Chapter Reach", value: "1,000+ Members" },
-        { label: "Students Trained", value: "700+" },
-        { label: "Status", value: "Live Portal" },
-      ],
-      techStack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-      links: {
-        github: "https://github.com/Atchyuteswar",
-        liveDemo: "https://bbh-mlritm.vercel.app",
-      },
-    },
-    {
-      id: "PRJ-08",
-      title: "Climate Action Front (CAF) — Climate Governance & Data Repository",
-      subtitle: "Policy & Investor Decision-Support Platform + Climate Data Analysis",
-      category: "Enterprise & Cloud (SAP / Web)",
-      semester: "Sem III–IV (Dec 2024 – Jan 2025)",
-      courseOrLab: "Data Science & Social Impact Engineering",
-      featured: false,
-      status: "Completed",
-      summary:
-        "Developed the web platform (`climate-action-front.vercel.app`) and organized the underlying climate data repository for a Delhi-based climate governance initiative, enabling data-driven policy and investor decisions.",
-      problemStatement:
-        "Climate policy researchers and green investors needed structured access to curated environmental datasets, governance publications, and organizational resources.",
-      methodology: [
-        "Architected and deployed the full organization portal with team directories, policy blog publishing, and resource libraries.",
-        "Organized and maintained the climate data repository, analyzing datasets to extract actionable insights for climate governance stakeholders.",
-      ],
-      outcomes: [
-        "Live production platform serving climate governance insights and research publications.",
-      ],
-      metrics: [
-        { label: "Focus", value: "Climate Data" },
-        { label: "Role", value: "Tech Contributor" },
-        { label: "Platform", value: "Next.js / Vercel" },
-      ],
-      techStack: ["Next.js", "Data Analysis", "Python", "Tailwind CSS", "Vercel"],
-      links: {
-        github: "https://github.com/Atchyuteswar",
-        liveDemo: "https://climate-action-front.vercel.app",
-      },
-    },
-    {
-      id: "PRJ-09",
-      title: "Simple Todo REST API & Earth Leaders Sustainability Portal",
-      subtitle: "Swagger OpenAPI Backend + Interactive Environmental Education Web App",
-      category: "Enterprise & Cloud (SAP / Web)",
-      semester: "Sem II–III (Jan – Aug 2024)",
-      courseOrLab: "Full-Stack Web Engineering & API Design",
-      featured: false,
-      status: "Completed",
-      summary:
-        "A pair of early undergraduate web systems: (1) a RESTful task service documented with interactive Swagger/OpenAPI specs, and (2) 'Earth Leaders' & 'Dhara', interactive web platforms promoting ecological restoration.",
-      problemStatement:
-        "Demonstrating clean REST API contract documentation with Swagger alongside engaging educational web interfaces.",
-      methodology: [
-        "Built RESTful CRUD endpoints with full Swagger UI schema documentation (`simple-todo-two-coral.vercel.app/swagger`).",
-        "Developed interactive gamified awareness modules in Earth Leaders (`earth-leaders.vercel.app`) and team qualification portal Dhara (`dhara-website.netlify.app`).",
-      ],
-      outcomes: [
-        "3 live deployed web applications demonstrating progressive mastery of REST APIs, Svelte, and Next.js.",
-      ],
-      metrics: [
-        { label: "API Spec", value: "Swagger OpenAPI" },
-        { label: "Deployments", value: "3 Live Apps" },
-        { label: "Year", value: "2024" },
-      ],
-      techStack: ["Next.js", "Svelte", "Node.js", "REST API", "Swagger", "Vercel", "Netlify"],
-      links: {
-        liveDemo: "https://simple-todo-two-coral.vercel.app/swagger",
-        github: "https://github.com/Atchyuteswar",
       },
     },
   ] as ProjectItem[],
@@ -852,11 +718,11 @@ export const portfolioData = {
         period: "2025 – 2026",
         status: "Completed",
         sgpa: "Completed",
-        highlight: "Computer Networks, Compiler Design, WasteAI CNN Benchmark & Aira NLP Companion",
+        highlight: "Computer Networks, Compiler Design, Deep Learning & WasteAI Multi-CNN Benchmark",
         courses: [
           { code: "CS301", name: "Computer Networks & Protocol Engineering", tag: "Core CS" },
           { code: "CS302", name: "Compiler Design & Formal Languages", tag: "Core CS" },
-          { code: "DS305", name: "Deep Learning, CNNs & Natural Language Processing", tag: "Data Science" },
+          { code: "DS305", name: "Deep Learning, CNNs & Computer Vision", tag: "Data Science" },
           { code: "IP390", name: "Multimodal Sensor Fusion & Edge-AI Prototyping", tag: "Capstone" },
         ],
       },
@@ -910,21 +776,6 @@ export const portfolioData = {
     },
     {
       id: "EXP-02",
-      role: "Tech Contributor & Climate Data Repository Lead",
-      organization: "Climate Action Front (CAF)",
-      departmentOrLab: "Climate Governance & Data Analytics Team",
-      period: "Dec 2024 — Present",
-      location: "Delhi, India · Remote",
-      description:
-        "Driving web engineering and environmental dataset curation to support climate governance transparency and investor decision-making.",
-      highlights: [
-        "Developed and deployed the official CAF web platform (climate-action-front.vercel.app) to facilitate timely climate governance information.",
-        "Organized and maintained the central climate data repository; analyzed datasets to generate actionable insights for clients in climate policy and investment.",
-      ],
-      tags: ["Next.js", "Data Analysis", "Data Repositories", "Climate Tech", "Vercel"],
-    },
-    {
-      id: "EXP-03",
       role: "Blockchain Developer Intern",
       organization: "Timechain Labs",
       departmentOrLab: "Full-Stack Web3 & Smart Contract Engineering",
@@ -934,13 +785,13 @@ export const portfolioData = {
         "Engineered full-stack Web2 and Web3 applications using Next.js, Node.js, Svelte, and BSV smart contracts.",
       highlights: [
         "Implemented Web3 smart contract and multi-mode wallet functionality in the Cryptolit platform (cryptolit.vercel.app).",
-        "Built full-stack web applications using Next.js, Node.js, and Svelte, including a RESTful To-Do application documented with Swagger OpenAPI.",
+        "Built full-stack decentralized web interfaces using Next.js, Node.js, and Svelte.",
         "Managed relational database schemas and migrations using Neon DB (Serverless PostgreSQL) and Prisma ORM.",
       ],
-      tags: ["Next.js", "Svelte", "Node.js", "Web3 / Smart Contracts", "Neon DB", "Prisma ORM", "Swagger"],
+      tags: ["Next.js", "Svelte", "Node.js", "Web3 / Smart Contracts", "Neon DB", "Prisma ORM"],
     },
     {
-      id: "EXP-04",
+      id: "EXP-03",
       role: "Scrum Master Intern & Open-Source Volunteer",
       organization: "Swecha Telangana & GirlScript Summer of Code (GSSoC '24)",
       departmentOrLab: "Agile Delivery & Open-Source Engineering",
@@ -970,7 +821,6 @@ export const portfolioData = {
       description:
         "Led the Hyderabad and MLRITM collegiate chapter, spearheading community outreach across 3+ major blockchain events and bootcamps. Conducted hands-on workshops on smart contract development and legal/real-world Web3 applications.",
       impactMetric: "Grew Chapter to 1,000+ Members · Trained 700+ Students & Professionals",
-      link: "https://bbh-mlritm.vercel.app",
     },
     {
       id: "CL-02",

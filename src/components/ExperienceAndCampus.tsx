@@ -31,7 +31,7 @@ export function ExperienceSection() {
           </div>
           <p className="max-w-md text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4] leading-relaxed">
             Practical industry internships completed during my B.Tech tenure—spanning SAP ABAP
-            Cloud at Naxrita, Web3 at Timechain Labs, and Climate Data at CAF.
+            Cloud at Naxrita, Web3 at Timechain Labs, and Agile Open-Source at Swecha &amp; GSSoC.
           </p>
         </div>
 
