@@ -100,7 +100,7 @@ export default function ProjectSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-6 mb-6 sm:pb-8 sm:mb-8 border-b border-[#DED8C8] dark:border-[#272D37]">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 font-mono text-[11px] sm:text-xs uppercase tracking-widest text-[#9E2A2B] dark:text-[#E06D53] font-semibold">
-              <span>§ 02</span>
+              <span>§ 03</span>
               <span>—</span>
               <span>COLLEGIATE ENGINEERING &amp; RESEARCH ARTIFACTS</span>
             </div>

@@ -13,11 +13,11 @@ import {
 } from "lucide-react";
 
 const navItems = [
-  { index: "§01", label: "Patents & IP", href: "#patents" },
-  { index: "§02", label: "Projects", href: "#projects" },
-  { index: "§03", label: "Certifications", href: "#certifications" },
-  { index: "§04", label: "MLRITM '27", href: "#education" },
-  { index: "§05", label: "Internships", href: "#experience" },
+  { index: "§01", label: "Education & Skills", href: "#education" },
+  { index: "§02", label: "Experience", href: "#experience" },
+  { index: "§03", label: "Projects", href: "#projects" },
+  { index: "§04", label: "Patents & IP", href: "#patents" },
+  { index: "§05", label: "Certifications", href: "#certifications" },
   { index: "§06", label: "Leadership", href: "#campus" },
 ];
 
