@@ -3,6 +3,7 @@ import "./globals.css";
 import { portfolioData } from "@/data/portfolioData";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://atchyut.runs-on.dev"),
   title: `${portfolioData.profile.fullName} — Academic, Patent & Collegiate Portfolio (MLRITM '27)`,
   description: portfolioData.profile.shortBio,
   keywords: [
