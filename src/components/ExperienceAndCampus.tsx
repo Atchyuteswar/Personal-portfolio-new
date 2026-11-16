@@ -196,23 +196,7 @@ export function CampusLeadershipSection() {
                 </p>
               </div>
 
-              <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-end justify-between lg:justify-end gap-4">
-                <div className="grid grid-cols-2 sm:flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
-                  {profile.freelanceBridge.stats.map((st, idx) => (
-                    <div
-                      key={idx}
-                      className="px-3.5 py-2 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] text-left sm:text-right"
-                    >
-                      <div className="font-serif text-base sm:text-lg font-bold text-[#161615] dark:text-[#ECE8E1]">
-                        {st.value}
-                      </div>
-                      <div className="font-mono text-[10px] text-[#78756F] dark:text-[#A7ACB4]">
-                        {st.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
+              <div className="lg:col-span-4 flex items-center lg:justify-end">
                 <a
                   href={profile.freelanceBridge.url}
                   target="_blank"

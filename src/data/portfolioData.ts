@@ -168,10 +168,6 @@ export const portfolioData = {
       url: "https://atchyut.vercel.app",
       description:
         "This site serves as my dedicated Academic, Patent & Collegiate Monograph for MLRITM (2023–2027). To view my commercial client engagements, freelance web platforms, and studio services, visit my primary portfolio at atchyut.vercel.app.",
-      stats: [
-        { label: "Patent Application", value: "202641112485" },
-        { label: "Cloud & AI Badges", value: "30+ Earned" },
-      ],
     },
     musicConfig: {
       enabled: true,
