@@ -155,7 +155,7 @@ export default function EducationTimeline() {
                 >
                   <div className="flex items-center justify-between gap-1 mb-1">
                     <span className="font-mono text-[10px] uppercase font-bold text-[#9E2A2B] dark:text-[#E06D53]">
-                      0{idx + 1}
+                      {String(idx + 1).padStart(2, "0")}
                     </span>
                     <span
                       className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
@@ -227,6 +227,118 @@ export default function EducationTimeline() {
               </div>
             </div>
           )}
+
+          {/* Resume Technical Skills Matrix */}
+          <div className="pt-4 sm:pt-6">
+            <div className="p-4 sm:p-6 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] space-y-4">
+              <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-1 border-b border-[#DED8C8] dark:border-[#272D37] pb-3">
+                <div className="font-mono text-[11px] sm:text-xs uppercase tracking-wider text-[#9E2A2B] dark:text-[#E06D53] font-semibold">
+                  Consolidated Technical Skills &amp; Stack Matrix
+                </div>
+                <span className="font-mono text-[10px] sm:text-[11px] text-[#78756F] dark:text-[#A7ACB4]">
+                  AI / Data Science · SAP ABAP Cloud · Full-Stack &amp; Android
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                <div className="p-3.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] space-y-2">
+                  <div className="font-mono text-[11px] font-bold uppercase text-[#161615] dark:text-[#ECE8E1]">
+                    Languages &amp; Core CS
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {["Python", "Java", "C", "Kotlin", "ABAP", "SQL", "TypeScript", "JavaScript", "HTML/CSS"].map(
+                      (skill) => (
+                        <span
+                          key={skill}
+                          className="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono bg-white dark:bg-[#181C22] border border-[#DED8C8] dark:border-[#272D37] text-[#52504C] dark:text-[#A7ACB4]"
+                        >
+                          {skill}
+                        </span>
+                      )
+                    )}
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] space-y-2">
+                  <div className="font-mono text-[11px] font-bold uppercase text-[#161615] dark:text-[#ECE8E1]">
+                    AI, Deep Learning &amp; Data
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      "TensorFlow / Keras",
+                      "VGG19 / MobileNetV2",
+                      "scikit-learn",
+                      "Gemini 2.5 Flash",
+                      "ML Kit",
+                      "NLP / TF-IDF",
+                      "Pandas / NumPy",
+                      "Hugging Face Hub",
+                      "Streamlit",
+                    ].map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono bg-white dark:bg-[#181C22] border border-[#DED8C8] dark:border-[#272D37] text-[#52504C] dark:text-[#A7ACB4]"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] space-y-2">
+                  <div className="font-mono text-[11px] font-bold uppercase text-[#161615] dark:text-[#ECE8E1]">
+                    Enterprise SAP &amp; Cloud
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      "SAP S/4HANA",
+                      "ABAP Cloud",
+                      "ABAP RAP",
+                      "CDS Views",
+                      "OData Services",
+                      "Eclipse ADT",
+                      "AWS Cloud",
+                      "Google Cloud (GCP)",
+                      "Supabase",
+                    ].map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono bg-white dark:bg-[#181C22] border border-[#DED8C8] dark:border-[#272D37] text-[#52504C] dark:text-[#A7ACB4]"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] space-y-2">
+                  <div className="font-mono text-[11px] font-bold uppercase text-[#161615] dark:text-[#ECE8E1]">
+                    Mobile, Web &amp; Web3
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      "Jetpack Compose",
+                      "Next.js / React",
+                      "Tailwind CSS",
+                      "SvelteKit",
+                      "Node.js",
+                      "PostgreSQL / MySQL",
+                      "BSV Blockchain",
+                      "Smart Contracts",
+                      "Git / GitHub",
+                    ].map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-mono bg-white dark:bg-[#181C22] border border-[#DED8C8] dark:border-[#272D37] text-[#52504C] dark:text-[#A7ACB4]"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

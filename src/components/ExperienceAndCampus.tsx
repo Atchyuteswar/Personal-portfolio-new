@@ -214,7 +214,7 @@ export function CampusLeadershipSection() {
 
       {/* Colophon / Academic Footer */}
       <footer className="py-10 sm:py-12 bg-[#FAF7F2] dark:bg-[#0D0F12] text-xs font-mono text-[#52504C] dark:text-[#A7ACB4]">
-        <div className="max-w-7xl 2xl:max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="max-w-7xl 2xl:max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="font-semibold text-[#161615] dark:text-[#ECE8E1]">
               {profile.fullName} — Academic, Patent &amp; Collegiate Research Dossier
@@ -222,13 +222,34 @@ export function CampusLeadershipSection() {
             <div className="text-[11px] sm:text-xs">
               {profile.degree} · {profile.university} · Graduating {profile.graduationMonthYear}
             </div>
+            <div className="text-[11px] text-[#78756F]">
+              Roll No. {profile.rollNumber} · Indian Patent App. No. 202641112485
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto justify-between sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-[#DED8C8]/60 dark:border-[#272D37]/60">
-            <span className="inline-flex items-center gap-1.5 text-[11px] text-[#78756F]">
-              <FileCode2 className="w-3.5 h-3.5 shrink-0" />
-              <span>src/data/portfolioData.ts</span>
-            </span>
+          <div className="flex flex-wrap items-center gap-4 w-full md:w-auto justify-between md:justify-end pt-3 md:pt-0 border-t md:border-t-0 border-[#DED8C8]/60 dark:border-[#272D37]/60">
+            <a
+              href={`mailto:${profile.email}`}
+              className="hover:text-[#161615] dark:hover:text-[#ECE8E1] transition-colors"
+            >
+              Email
+            </a>
+            <a
+              href={profile.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#161615] dark:hover:text-[#ECE8E1] transition-colors"
+            >
+              GitHub
+            </a>
+            <a
+              href={profile.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#161615] dark:hover:text-[#ECE8E1] transition-colors"
+            >
+              LinkedIn
+            </a>
             <a
               href="#top"
               className="text-[#9E2A2B] dark:text-[#E06D53] hover:underline font-semibold"

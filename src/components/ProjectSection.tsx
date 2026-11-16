@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { portfolioData, ProjectItem } from "@/data/portfolioData";
 import {
   Search,
@@ -74,6 +74,20 @@ export default function ProjectSection() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+
+  useEffect(() => {
+    if (!selectedProject) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedProject(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject]);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((proj) => {
@@ -500,7 +514,7 @@ export default function ProjectSection() {
                         className="flex items-start gap-2.5 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
                       >
                         <span className="font-mono text-xs font-bold text-[#9E2A2B] dark:text-[#E06D53] mt-0.5 shrink-0">
-                          0{i + 1}.
+                          {String(i + 1).padStart(2, "0")}.
                         </span>
                         <span className="leading-relaxed">{renderRichStep(step)}</span>
                       </li>
@@ -525,7 +539,7 @@ export default function ProjectSection() {
                               className="p-3 sm:p-3.5 rounded-lg border border-[#DED8C8] dark:border-[#272D37] bg-white dark:bg-[#181C22] flex items-start gap-3 text-xs sm:text-sm text-[#52504C] dark:text-[#A7ACB4]"
                             >
                               <span className="mt-0.5 px-2 py-0.5 rounded bg-[#F3EFE6] dark:bg-[#222731] border border-[#DED8C8]/80 dark:border-[#2F3643] font-mono text-[10px] font-bold text-[#1D3557] dark:text-[#6CA0DC] shrink-0">
-                                STEP 0{idx + 1}
+                                STEP {String(idx + 1).padStart(2, "0")}
                               </span>
                               <div className="leading-relaxed flex-1">
                                 {renderRichStep(step)}
@@ -697,6 +711,16 @@ export default function ProjectSection() {
                     >
                       <Tag className="w-3.5 h-3.5 text-[#1D3557] dark:text-[#6CA0DC]" />
                       <span>Release v1.0.0</span>
+                    </a>
+                  )}
+                  {selectedProject.links.reportPdf && (
+                    <a
+                      href={selectedProject.links.reportPdf}
+                      onClick={() => setSelectedProject(null)}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded bg-[#9E2A2B] text-white dark:bg-[#E06D53] dark:text-[#0D0F12] text-xs font-mono font-semibold hover:opacity-95 transition-opacity"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>View Patent Specification (§ 04)</span>
                     </a>
                   )}
                 </div>

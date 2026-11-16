@@ -161,21 +161,21 @@ export default function HeroMonograph() {
                 <Sparkles className="w-5 h-5 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
               </div>
 
-              {/* Key Quantitative Indicators: 2 cols on mobile, 4 cols on tablet, 2 cols on desktop sidebar */}
+              {/* Key Quantitative Indicators: Ordered to match Resume sequence */}
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-2.5 sm:gap-3">
                 <a
-                  href="#patents"
+                  href="#education"
                   className="p-3 sm:p-3.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] hover:border-[#9E2A2B] transition-colors group"
                 >
                   <div className="flex items-center justify-between text-[#78756F] dark:text-[#A7ACB4] mb-1">
-                    <span className="font-mono text-[10px] uppercase">Patent Filed</span>
-                    <ScrollText className="w-3.5 h-3.5 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
+                    <span className="font-mono text-[10px] uppercase">CGPA</span>
+                    <Award className="w-3.5 h-3.5 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
                   </div>
                   <div className="font-serif text-xl sm:text-2xl font-bold text-[#161615] dark:text-[#ECE8E1] group-hover:text-[#9E2A2B] dark:group-hover:text-[#E06D53]">
-                    01
+                    7.65
                   </div>
                   <div className="font-mono text-[10px] text-[#52504C] dark:text-[#A7ACB4] mt-0.5 truncate">
-                    App: 202641112485
+                    CSE (Data Sci)
                   </div>
                 </a>
 
@@ -188,10 +188,26 @@ export default function HeroMonograph() {
                     <Cpu className="w-3.5 h-3.5 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
                   </div>
                   <div className="font-serif text-xl sm:text-2xl font-bold text-[#161615] dark:text-[#ECE8E1] group-hover:text-[#9E2A2B] dark:group-hover:text-[#E06D53]">
-                    0{projects.length}
+                    {String(projects.length).padStart(2, "0")}
                   </div>
                   <div className="font-mono text-[10px] text-[#52504C] dark:text-[#A7ACB4] mt-0.5 truncate">
                     AI, SAP &amp; Web3
+                  </div>
+                </a>
+
+                <a
+                  href="#patents"
+                  className="p-3 sm:p-3.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] hover:border-[#9E2A2B] transition-colors group"
+                >
+                  <div className="flex items-center justify-between text-[#78756F] dark:text-[#A7ACB4] mb-1">
+                    <span className="font-mono text-[10px] uppercase">Patent Filed</span>
+                    <ScrollText className="w-3.5 h-3.5 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
+                  </div>
+                  <div className="font-serif text-xl sm:text-2xl font-bold text-[#161615] dark:text-[#ECE8E1] group-hover:text-[#9E2A2B] dark:group-hover:text-[#E06D53]">
+                    {String(patents.length).padStart(2, "0")}
+                  </div>
+                  <div className="font-mono text-[10px] text-[#52504C] dark:text-[#A7ACB4] mt-0.5 truncate">
+                    App: 202641112485
                   </div>
                 </a>
 
@@ -208,22 +224,6 @@ export default function HeroMonograph() {
                   </div>
                   <div className="font-mono text-[10px] text-[#52504C] dark:text-[#A7ACB4] mt-0.5 truncate">
                     SAP, AWS, GCP
-                  </div>
-                </a>
-
-                <a
-                  href="#education"
-                  className="p-3 sm:p-3.5 rounded border border-[#DED8C8] dark:border-[#272D37] bg-[#FAF7F2] dark:bg-[#14181D] hover:border-[#9E2A2B] transition-colors group"
-                >
-                  <div className="flex items-center justify-between text-[#78756F] dark:text-[#A7ACB4] mb-1">
-                    <span className="font-mono text-[10px] uppercase">CGPA</span>
-                    <Award className="w-3.5 h-3.5 text-[#9E2A2B] dark:text-[#E06D53] shrink-0" />
-                  </div>
-                  <div className="font-serif text-xl sm:text-2xl font-bold text-[#161615] dark:text-[#ECE8E1] group-hover:text-[#9E2A2B] dark:group-hover:text-[#E06D53]">
-                    7.65
-                  </div>
-                  <div className="font-mono text-[10px] text-[#52504C] dark:text-[#A7ACB4] mt-0.5 truncate">
-                    CSE (Data Sci)
                   </div>
                 </a>
               </div>
